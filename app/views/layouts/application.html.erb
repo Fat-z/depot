@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pragprog Books Online Store</title>
+	<%= stylesheet_link_tag "application" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tag %>
+</head>
+<body class="<%= controller.controller_name %>">
+	<div id="banner">
+		<%= image_tag("logo.png") %>
+		<%= @page_title || "Pragmatic Bookshelf" %>
+	</div>
+
+	<div id="columns">
+		<div id="side">
+			<ul>
+				<li><a href="http://www.baidu.com">Home</a></li>
+				<li><a href="http://www.sina.com.cn">Question</a></li>
+				<li><a href="http://www.dapenti.com">News</a></li>
+				<li><a href="http://lol.qq.com">Contact</a></li>
+			</ul>
+		</div>
+		<div id="main">
+			<%= yield %>
+		</div>
+	</div>
+</body>
+</html>
