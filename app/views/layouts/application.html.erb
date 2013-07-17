@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--  <title>Depot</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <title>Pragprog Books Online Store</title>
+  <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
- -->
- <title>Pragprog Books Online Store</title>
- <%= stylesheet_link_tag "application"%>
- <%= javascript_include_tag "application" %>
- <%= csrf_meta_tag %>
 </head>
-<!--
-	<body class='<%= controller.controller_name %>'>
-	-->
-<body class="<%= controller.controller_name %>">	
 
-
+<body class="<%= controller.controller_name %>">
   <div id="banner">
-  	<%= image_tag("logo.png") %>
-  	<%= @page_title || "Pragmatic Bookshelf" %>
+    <%= image_tag("logo.png") %>
+    <%= @page_title || "Pragmatic Bookshelf" %>
   </div>
   <div id="columns">
-  	<div id="side">
-  		<ul>
-  			<li><a href="http://www....">Home</a></li>
-  			<li><a href="http://www..../fag">Questions</a></li>
-  			<li><a href="http://www..../news">News</a></li>
-  			<li><a href="http://www..../contact">Contact</a></li>
-  		</ul>
-  	</div>
-  <div id="main">
-  	<%= yield %>
-  </div>
- </div>
+    <div id="side">
 
+      <% if @cart %>
+        <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
+          <%= render @cart %>
+        <% end %>
+      <% end %>
+
+      <ul>
+        <li><a href="http://www....">Home</a></li>
+        <li><a href="http://www..../faq">Questions</a></li>
+        <li><a href="http://www..../news">News</a></li>
+        <li><a href="http://www..../contact">Contact</a></li>
+      </ul>
+    </div>
+    <div id="main">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>
