@@ -9,8 +9,18 @@
 <body class="<%= controller.controller_name %>">
 
 <div id="banner">
+	
+	<%= form_tag store_path, class: 'locale' do %>
+		<%= select_tag 'set_locale',
+			options_for_select(LANGUAGES, I18n.locale.to_s),
+			onchange: 'this.form.submit()' %>
+		<%= submit_tag 'submit'%>
+		<%= javascript_tag "$('.locale input').hide()" %>
+	<% end %>
+		
 	<%= image_tag("logo.png") %>
-	<%= @page_title || "Pragmatic Bookshelf" %>
+	<%= @page_title || t('.title') %>
+	<!--<%= @page_title || "Pragmatic Bookshelf" %>-->
 </div>
 <div id="columns">
 	<div id="side">
@@ -21,10 +31,16 @@
 		<% end %>    
 		
 		<ul>
+			<li> <a href="http://www.baidu.com"><%= t('.home') %></a> </li>
+			<li> <a href="http://www.baidu.com"><%= t('.questions') %></a> </li>
+			<li> <a href="http://www.baidu.com"><%= t('.news') %></a> </li>
+			<li> <a href="http://www.baidu.com"><%= t('.contact') %></a> </li>
+			<!--
 			<li><a href="http://www....">Home</a></li>	
 			<li><a href="http://www..../faq">Questions</a></li>
 			<li><a href="http://www..../news">News</a></li>
 			<li><a href="http://www..../contact">Contact</a></li>
+			-->
 		</ul>
 		
 		<% if session[:user_id] %>
