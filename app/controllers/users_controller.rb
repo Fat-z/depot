@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
+<<<<<<< HEAD
   skip_before_filter :authorize,only: [:new, :create]
   
+=======
+>>>>>>> rmp
   def index
     @users = User.order(:name)
 
