@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pragprog Books Online Store</title>
+  <%= stylesheet_link_tag  "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tag %>
+</head>
+<body class="<%= controller.controller_name %>">
+
+<div id="banner">
+	
+	<%= form_tag store_path, class: 'locale' do %>
+		<%= select_tag 'set_locale',
+			options_for_select(LANGUAGES, I18n.locale.to_s),
+			onchange: 'this.form.submit()' %>
+		<%= submit_tag 'submit'%>
+		<%= javascript_tag "$('.locale input').hide()" %>
+	<% end %>
+		
+	<%= image_tag("logo.png") %>
+	<%= @page_title || t('.title') %>
+	<!--<%= @page_title || "Pragmatic Bookshelf" %>-->
+</div>
+<div id="columns">
+	<div id="side">
+		
+		<%= form_tag store_path do %>
+			<div class = "field">
+				<%= text_field_tag 'search'%>
+				<%= submit_tag 'Search' %>
+				<br />
+			</div>
+		<% end %>
+		
+		<% if @cart %>
+     		<%= hidden_div_if(@cart.line_items.empty?, id:'cart') do%>
+	    		<%= render @cart %>
+		    <% end %>
+		<% end %>    
+		
+		<ul>
+			<li> <a href="http://www.baidu.com"><%= t('.home') %></a> </li>
+			<li> <a href="http://www.baidu.com"><%= t('.questions') %></a> </li>
+			<li> <a href="http://www.baidu.com"><%= t('.news') %></a> </li>
+			<li> <a href="http://www.baidu.com"><%= t('.contact') %></a> </li>
+			<!--
+			<li><a href="http://www....">Home</a></li>	
+			<li><a href="http://www..../faq">Questions</a></li>
+			<li><a href="http://www..../news">News</a></li>
+			<li><a href="http://www..../contact">Contact</a></li>
+			-->
+		</ul>
+		
+		<% if session[:user_id] %>
+		  <ul>
+		  	<li><%= link_to 'Orders',   orders_path   %></li>
+		  	<li><%= link_to 'Products', products_path %></li>
+		  	<li><%= link_to 'Users',    users_path    %></li>
+		  </ul>
+		  <%= button_to 'Logout', logout_path, method: :delete %>
+		<% end %>  
+	</div>
+	<div id="main">			
+      <%= yield %>
+    </div>
+   </div>     
+</body>
+</html>

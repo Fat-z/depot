@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+  - "1.9.3-p429"
+install:
+  - "sh .travis_install.sh"
+  - "bundle install"
+before_script:
+  - "rake db:migrate"
+# uncomment this line if your project needs to run something other than `rake`:
+# script: bundle exec rspec spec
