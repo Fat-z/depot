@@ -24,6 +24,15 @@
 </div>
 <div id="columns">
 	<div id="side">
+		
+		<%= form_tag store_path do %>
+			<div class = "field">
+				<%= text_field_tag 'search'%>
+				<%= submit_tag 'Search' %>
+				<br />
+			</div>
+		<% end %>
+		
 		<% if @cart %>
      		<%= hidden_div_if(@cart.line_items.empty?, id:'cart') do%>
 	    		<%= render @cart %>
