@@ -41,7 +41,9 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(params[:product])
-
+    if session[:user_id] != nil
+      @product.publish = User.find_by_id(session[:user_id]).name
+    end
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -76,7 +78,7 @@ class ProductsController < ApplicationController
     @product.destroy
 
     respond_to do |format|
-      format.html { redirect_to products_url }
+      format.html { redirect_to store_url }
       format.json { head :no_content }
     end
   end

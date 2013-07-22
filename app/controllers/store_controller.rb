@@ -6,7 +6,11 @@ class StoreController < ApplicationController
       redirect_to store_path(locale: params[:set_locale])
      end
 
-    @products = Product.order(:title)
+    if(session[:user_id] == nil or User.find_by_id(session[:user_id]).identity == "customer")
+      @products = Product.order(:title)
+    else
+      @products = Product.where(publish: User.find_by_id(session[:user_id]).name).order(:title)
+    end
     @cart = current_cart
 
     if params[:search] and params[:search].lstrip != ""
