@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
+  skip_before_filter :authorize, only: [:detail]
+  
   def index
     @products = Product.all
 
@@ -89,4 +91,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def detail
+    @product = Product.find(params[:id])
+    
+    respond_to do |format|
+      format.html # detail.html.erb
+      format.json { render json: @product }
+    end
+  end
 end

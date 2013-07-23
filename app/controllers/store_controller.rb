@@ -6,7 +6,12 @@ class StoreController < ApplicationController
       redirect_to store_path(locale: params[:set_locale])
      end
 
-    @products = Product.order(:title)
+    if params[:catagory]
+      @products = Product.where("category = ?", params[:catagory])
+    else
+      @products = Product.order(:title)
+    end
+    
     @cart = current_cart
 
     if params[:search] and params[:search].lstrip != ""

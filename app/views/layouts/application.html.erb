@@ -52,6 +52,15 @@
 			-->
 		</ul>
 		
+		<div>
+			<ul>
+				<% for item in Product::PRODUCT_CATEGORY %>
+					<!--<li><%= link_to item, store_path%></li>-->
+					<li><%= link_to( item, {:controller =>'store',:action => 'index',:catagory => item} ) %></li>
+				<% end %>
+			</ul>	
+		</div>
+		
 		<% if session[:user_id] %>
 		  <ul>
 		  	<li><%= link_to 'Orders',   orders_path   %></li>

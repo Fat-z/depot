@@ -32,6 +32,7 @@ Depot::Application.routes.draw do
   
     resources :products do 
       get :who_bought, on: :member
+      get :detail,  on: :member
     end
   
     root to: 'store#index', as: 'store'
