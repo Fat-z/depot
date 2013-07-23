@@ -2,7 +2,8 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = Product.where(publish: User.find_by_id(session[:user_id]).name)
+    #@products = Product.all
 
     respond_to do |format|
       format.html # index.html.erb

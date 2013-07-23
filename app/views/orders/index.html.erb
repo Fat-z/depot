@@ -6,21 +6,30 @@
     <th>Address</th>
     <th>Email</th>
     <th>Pay type</th>
+    <th>Book title</th>
+    <th>quantity</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @orders.each do |order| %>
-  <tr>
-    <td><%= order.name %></td>
-    <td><%= order.address %></td>
-    <td><%= order.email %></td>
-    <td><%= order.pay_type %></td>
-    <td><%= link_to 'Show', order %></td>
-    <td><%= link_to 'Edit', edit_order_path(order) %></td>
-    <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+
+<!-- order     Order.find_by_id(line_item.order_id)-->
+
+<% @line_items.each do |line_item| %>
+  <% if Product.find_by_id(line_item.product_id).publish == User.find_by_id(session[:user_id]).name %>
+    <tr>
+      <td><%= Order.find_by_id(line_item.order_id).name %></td>
+      <td><%= Order.find_by_id(line_item.order_id).address %></td>
+      <td><%= Order.find_by_id(line_item.order_id).email %></td>
+      <td><%= Order.find_by_id(line_item.order_id).pay_type %></td>
+      <td><%= Product.find_by_id(line_item.product_id).title %></td>
+      <td><%= line_item.quantity %></td>
+      <td><%= link_to 'Show', Order.find_by_id(line_item.order_id) %></td>
+      <td><%= link_to 'Edit', edit_order_path(Order.find_by_id(line_item.order_id)) %></td>
+      <td><%= link_to 'Destroy', Order.find_by_id(line_item.order_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
 <% end %>
 </table>
 
