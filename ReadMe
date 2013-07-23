@@ -1,0 +1,27 @@
+新功能介绍：
+
+1.搜索
+	描述：
+		购买页面，输入商品名字，返回查询商品
+	算法：
+		字符串查找（忽略大小写），只匹配商品title
+	结果：
+		无效查询，返回主页面；（如输入空格）
+		查询不到，返回主页面，并提示"not found"；
+		成功查询，返回商品列表。
+	
+2.添加中文，日文
+	没什么好说的
+
+3.添加分类
+	Product添加属性：category:	string
+	类别声明：
+		PRODUCT_CATEGORY = ["literature", "science", "life", "culture", "Economic"]
+	添加检验：
+		validates :category, inclusion: PRODUCT_CATEGORY
+	更改插入，编辑：
+		product的edit，new相应页面
+	更改显示页面：
+		在主页面显示分类链接，更改对应的controller接收参数，并返回对应的products
+	结束
+	
