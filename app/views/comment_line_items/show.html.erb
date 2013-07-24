@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Product:</b>
+  <%= @comment_line_item.product_id %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%= @comment_line_item.comment_id %>
+</p>
+
+<p>
+  <b>Comment content:</b>
+  <%= @comment_line_item.comment_content %>
+</p>
+
+
+<%= link_to 'Edit', edit_comment_line_item_path(@comment_line_item) %> |
+<%= link_to 'Back', comment_line_items_path %>

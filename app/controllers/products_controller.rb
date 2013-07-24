@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  skip_before_filter :authorize, only: :show
   # GET /products
   # GET /products.json
   def index
@@ -8,16 +9,23 @@ class ProductsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @products }
     end
+    
   end
 
   # GET /products/1
-  # GET /products/1.json
+  # GET /products/1.xml
   def show
+    @cart = current_cart
+    @comment_line_item = CommentLineItem.new
     @product = Product.find(params[:id])
-
+    product_id = params[:id]
+    @comments =CommentLineItem.where(:product_id => product_id).order("created_at desc").paginate :page=>params[:page],
+     :per_page => 3
+    @comments2 =CommentLineItem.where(:product_id => product_id)
+    @product.comment_number = @comments2.length
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @product }
+      format.xml { render :xml => @product }
     end
   end
 

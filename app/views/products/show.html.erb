@@ -1,25 +1,59 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @product.title %>
-</p>
+	<%= image_tag(@product.image_url, class: 'img') %>
 
-<p>
-  <b>Description:</b>
-  <%= @product.description %>
-</p>
+    <p>
+    <b>Title:</b>
+      <%= @product.title %>
+    </p>
+  
+    <p>
+    <b>Price:</b>
+      <%= number_to_currency(@product.price) %>
+    </p>
+    
+    <p>
+    <b>Comments:</b>
+      <%= @product.comment_number %>
+    </p>
+    
+    <div>
+    <%= button_to "Add to Cart", line_items_path(:product_id => @product), remote: true%>
+    </div>	
+    <br><br />
+    <br><br />
+    <br><br />
+    <br><br />
+<div id="splite_line" style="border-top:1px dashed #cccccc; height: 1px; overflow:hidden"></div>
+<div>
+	<b>Description:</b>
+	  <%= sanitize @product.description %>
+</div>
 
-<p>
-  <b>Image url:</b>
-  <%= @product.image_url %>
-</p>
+<div style="border-top:1px dashed #cccccc; height: 1px; overflow:hidden"></div>
 
-<p>
-  <b>Price:</b>
-  <%= @product.price %>
-</p>
-
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<div id ="comment_list_detail">
+	<h3>Customer Reviews</h3>
+	<% @comments.each do |comment|%>
+	    <div id="each_comment">
+	    	<div id="each_comment_content">
+	    		<%= image_tag("customer.jpg", class: 'img') %>
+	    		<%= comment.comment_content %>
+	    		<%if session[:user_id]%>
+	    		    <div id="delete_comment">
+	    		    	<%= link_to 'Delete', comment, confirm: "Are you sure?", method: :delete, 
+	    		    	 style: "color:red" %>
+	    		    </div>
+	    		<% end %>
+            </div>
+            
+            <div id="each_comment_time">
+            	posted at: <%= comment.created_at %>
+            </div>
+        </div>
+   <%end%>
+</div>
+<div id="page_link"> <%= will_paginate @comments %> </div>
+<br />
+<div>
+		<%= render 'commentform' %>
+</div>

@@ -1,0 +1,27 @@
+<h1>Listing comment_line_items</h1>
+
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Comment</th>
+    <th>Comment content</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @comment_line_items.each do |comment_line_item| %>
+  <tr>
+    <td><%= comment_line_item.product_id %></td>
+    <td><%= comment_line_item.comment_id %></td>
+    <td><%= comment_line_item.comment_content %></td>
+    <td><%= link_to 'Show', comment_line_item %></td>
+    <td><%= link_to 'Edit', edit_comment_line_item_path(comment_line_item) %></td>
+    <td><%= link_to 'Destroy', comment_line_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Comment line item', new_comment_line_item_path %>

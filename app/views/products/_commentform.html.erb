@@ -1,0 +1,32 @@
+<%= form_for(@comment_line_item) do |f| %>
+  <% if @comment_line_item.errors.any? %>
+    <div id ="error_explanation">
+    	<h2><%= pluralize(@comment_line_item.errors.count, "error")%> prohibited this comment_line_item from being saved:</h2>
+    	
+    	<ul>
+        <% @comment_line_item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>  
+    	</ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+  	
+  	<%= f.hidden_field :product_id, :value => @product.id %>
+  </div>
+  	
+  <div class="field">
+  	
+    <%= f.hidden_field :comment_id, :value => @product.id %>
+  </div>
+  
+  <div class="field">
+  	<%= f.label "write down you comment here:", :id => "content_label"%><br />
+  	<%= f.text_area :comment_content, :id => "bxComment" %>
+  </div>
+  
+  <div class="actions">
+  	<%= f.submit 'create comment'  %>
+  </div>		
+<% end %>

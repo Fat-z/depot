@@ -7,9 +7,9 @@
 
 <% @products.each do |product| %>
   <div class="entry">
-    <%= image_tag(product.image_url) %>
-    <h3><%= product.title %></h3>
-    <p><%= sanitize(product.description) %></p>
+    <%= link_to(image_tag(product.image_url),product_path(id: product.id), method: :get )%>
+    <h3><%= link_to(product.title, product_path(id: product.id), method: :get )%></h3>
+    <p><%= truncate(strip_tags(product.description), length: 120) %></p>
     <div class="price_line">
 <!-- START:currency -->
       	<span class="price"><%= number_to_currency(product.price) %></span>
