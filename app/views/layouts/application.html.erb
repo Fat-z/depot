@@ -28,7 +28,7 @@
 		<%= form_tag store_path do %>
 			<div class = "field">
 				<%= text_field_tag 'search'%>
-				<%= submit_tag 'Search' %>
+				<%= submit_tag t('.search') %>
 				<br />
 			</div>
 		<% end %>
@@ -40,7 +40,7 @@
 		<% end %>    
 		
 		<ul>
-			<li> <a href="http://www.baidu.com"><%= t('.home') %></a> </li>
+			<li> <%= link_to t('.home'), store_path %> </li>
 			<li> <a href="http://www.baidu.com"><%= t('.questions') %></a> </li>
 			<li> <a href="http://www.baidu.com"><%= t('.news') %></a> </li>
 			<li> <a href="http://www.baidu.com"><%= t('.contact') %></a> </li>
@@ -54,16 +54,20 @@
 		
 		<% if session[:user_id] %>
 		  <ul>
-		  	<li><%= link_to 'Orders',   orders_path   %></li>
-		  	<li><%= link_to 'Products', products_path %></li>
-		  	<li><%= link_to 'Users',    users_path    %></li>
+		  	<li><%= link_to t('.orders'),   orders_path   %></li>
+		  	<li><%= link_to t('.products'), products_path %></li>
+		  	<li><%= link_to t('.users'),    users_path    %></li>
 		  </ul>
-		  <%= button_to 'Logout', logout_path, method: :delete %>
+		  <%= button_to t('.logout'), logout_path, method: :delete %>
+		<% else %>
+			<%= button_to t('.logIn'), login_path, method: :get %> 
 		<% end %>  
 	</div>
+	
 	<div id="main">			
       <%= yield %>
     </div>
+    
    </div>     
 </body>
 </html>

@@ -5,10 +5,17 @@ en:
   layouts:
     application:
       title:      "Pragmatic Bookshelf"
-      home:   "Home"
+      search:     "Search"
+      orders:     "Orders"
+      products:   "Products"
+      users:      "Users"
+      home:       "Home"
       questions:  "Questions"
       news:       "News"
       contact:    "Contact"
+      logout:     "Logout"
+      logIn:      "AdminLogin"
+      
   store:
     index:
       title_html: "Your Pragmatic Catalog"
