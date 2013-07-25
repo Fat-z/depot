@@ -11,6 +11,7 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 
@@ -28,6 +29,7 @@
       <td><%= link_to 'Show', Order.find_by_id(line_item.order_id) %></td>
       <td><%= link_to 'Edit', edit_order_path(Order.find_by_id(line_item.order_id)) %></td>
       <td><%= link_to 'Destroy', Order.find_by_id(line_item.order_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Send', {:controller => "sending", :action => "index", id: line_item} %></td>
     </tr>
   <% end %>
 <% end %>
@@ -35,6 +37,8 @@
 
 <br />
 
-<%= link_to 'New Order', new_order_path %>
+<% if session[:user_id] != nil and User.find_by_id(session[:user_id]).identity != 'seller' and User.find_by_id(session[:user_id]).identity != 'customer' %>
+  <%= link_to 'New Order', new_order_path %>
+<% end %>
 
-<p><%= will_paginate @orders %></p>
+<p><%= will_paginate @line_items %></p>

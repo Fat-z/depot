@@ -9,9 +9,10 @@
 	<br>We have <%= pluralize(@total_products_C, "product") %> for you to choose. </br>
 <% else %>
 	<br>You have published <%= pluralize(@total_products_S, "product") %>.</br>
-	<br>And you still have <%= @order_number %> orders need to be charged.</br>  
+	<br>And you still have <%= pluralize(@order_number, "order") %> need to be charged.</br>  
 <% end %>
 
+<!--
 
 <% @Line_items.each do |line_item| %>
 	<% if Product.find_by_id(line_item.product_id).publish == User.find_by_id(session[:user_id]).name %>
@@ -20,3 +21,5 @@
 	</br>
 	<% end %>
 <% end %>
+
+-->

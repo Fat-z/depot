@@ -22,4 +22,6 @@ class OrderNotifier < ActionMailer::Base
 
     mail to: order.email, subject: 'Pragmatic Store Order Shipped'
   end
+
+  
 end
