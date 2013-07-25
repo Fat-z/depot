@@ -20,7 +20,6 @@
 		<% @cart.line_items.each do |line_item|%>
 			<tr>
 				<%= form_for(line_item) do |f|%>
-					  <!--<td><%= line_item.quantity %></td>-->
 					  <td><%= f.number_field :quantity, :size => 3 %></td>
 					  <td><%= line_item.product.title %></td>
 					  <td class="item_price"><%= number_to_currency(line_item.total_price) %></td>

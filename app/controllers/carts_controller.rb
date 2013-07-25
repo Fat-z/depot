@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  skip_before_filter :authorize,only: [:create, :update, :destroy, :edit]
+  skip_before_filter :authorize,only: [:new,:create, :update, :destroy, :edit]
   
   # GET /carts
   # GET /carts.json
@@ -32,11 +32,12 @@ class CartsController < ApplicationController
   # GET /carts/new.json
   def new
     @cart = Cart.new
-
+    
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render json: @cart }
     end
+    
   end
 
   # GET /carts/1/edit
