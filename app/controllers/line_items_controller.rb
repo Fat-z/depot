@@ -7,7 +7,7 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
 class LineItemsController < ApplicationController
-  skip_before_filter :authorize, only: :create
+  skip_before_filter :authorize, only: [:create, :destroy, :update]
   
   # GET /line_items
   # GET /line_items.json
@@ -73,8 +73,27 @@ class LineItemsController < ApplicationController
   # PUT /line_items/1.json
   def update
     @line_item = LineItem.find(params[:id])
-
+    @cart = current_cart
+    
     respond_to do |format|
+      
+      if ((1..10) === params[:line_item]["quantity"].to_i) == false
+        format.html { redirect_to edit_cart_path(@cart), notice: 'Unexpected quantity. Valid interval [1..10]' }
+        
+      elsif @line_item.quantity == params[:line_item]["quantity"].to_i
+        format.html { redirect_to edit_cart_path(@cart), notice: 'No change.' }
+        
+      elsif @line_item.update_attributes(params[:line_item])
+        @cart = current_cart
+        format.html { redirect_to edit_cart_path(@cart), notice: 'Successfully updated.' }
+      else
+        @cart = current_cart
+        format.html { redirect_to edit_cart_path(@cart), notice: 'Unsuccessfully update.' }
+      end
+    end
+  end    
+      
+=begin      
       if @line_item.update_attributes(params[:line_item])
         format.html { redirect_to @line_item, notice: 'Line item was successfully updated.' }
         format.json { head :no_content }
@@ -82,18 +101,23 @@ class LineItemsController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
-    end
-  end
+=end
 
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
     @line_item = LineItem.find(params[:id])
     @line_item.destroy
+    @cart = current_cart
+    
+    respond_to do |format|
+      format.html { redirect_to edit_cart_path(@cart), notice: 'Remove line_item successfully.' }
+    end
+  end
 
+=begin  
     respond_to do |format|
       format.html { redirect_to line_items_url }
       format.json { head :no_content }
-    end
-  end
+=end
 end
