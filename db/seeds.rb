@@ -6,6 +6,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Product.delete_all
+User.delete_all
+
+User.create(name: 'web112',
+  password: '123',
+  password_digest: '$2a$10$twJAgHswDY5XT1rrBrgM3.bEQEiT7MdD03nv.4Vv.EW1cNFakA7Iu',
+  
+)
+
 Product.create(title: 'CoffeeScript',
   description: 
     %{<p>

@@ -20,7 +20,7 @@
 		
 	<%= image_tag("logo.png") %>
 	<%= @page_title || t('.title') %>
-	<!--<%= @page_title || "Pragmatic Bookshelf" %>-->
+
 </div>
 <div id="columns">
 	<div id="side">
@@ -44,12 +44,7 @@
 			<li> <a href="http://www.baidu.com"><%= t('.questions') %></a> </li>
 			<li> <a href="http://www.baidu.com"><%= t('.news') %></a> </li>
 			<li> <a href="http://www.baidu.com"><%= t('.contact') %></a> </li>
-			<!--
-			<li><a href="http://www....">Home</a></li>	
-			<li><a href="http://www..../faq">Questions</a></li>
-			<li><a href="http://www..../news">News</a></li>
-			<li><a href="http://www..../contact">Contact</a></li>
-			-->
+
 		</ul>
 		
 		<% if session[:user_id] %>

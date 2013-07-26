@@ -14,7 +14,7 @@ en:
       news:       "News"
       contact:    "Contact"
       logout:     "Logout"
-      logIn:      "AdminLogin"
+      logIn:      "Admin Login"
       
   store:
     index:
