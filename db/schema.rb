@@ -18,6 +18,20 @@ ActiveRecord::Schema.define(:version => 20130724055909) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "comment_line_items", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "comment_id"
+    t.text     "comment_content"
+    
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "comments", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "line_items", :force => true do |t|
     t.integer  "product_id"
     t.integer  "cart_id"

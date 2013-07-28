@@ -7,12 +7,8 @@ class LineItemsControllerTest < ActionController::TestCase
 
   test "should get index" do
     get :index
-    if User.find_by_id(session[:user_id]).identity != "administrator"
-      assert_redirected_to store_path
-    else
-      assert_response :success
-      assert_not_nil assigns(:line_items)
-    end
+    assert_response :success
+    assert_not_nil assigns(:line_items)
   end
 
   test "should get new" do

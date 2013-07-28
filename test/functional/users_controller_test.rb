@@ -12,12 +12,8 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should get index" do
     get :index
-    if User.find_by_id(session[:user_id]).identity != "administrator"
-      assert_redirected_to store_path
-    else
-      assert_response :success
-      assert_not_nil assigns(:users)
-    end
+    assert_response :success
+    assert_not_nil assigns(:users)
   end
 
   test "should get new" do
