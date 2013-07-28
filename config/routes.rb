@@ -1,4 +1,11 @@
 Depot::Application.routes.draw do
+
+  get "sending/index"
+
+  get "sending/sendout" => 'sending#sendout'
+
+  get "sending/stockout" => 'sending#stockout'
+
   resources :comments
 
 
@@ -6,6 +13,8 @@ Depot::Application.routes.draw do
 
 
   get 'admin' => 'admin#index'
+  
+  
   
   controller :sessions do
     get  'login' => :new
@@ -31,6 +40,11 @@ Depot::Application.routes.draw do
   
     resources :carts
   
+    resources :sending do 
+      get :stockout, on: :member
+      get :sendout, on: :member
+      
+    end
   
     get "store/index"
   

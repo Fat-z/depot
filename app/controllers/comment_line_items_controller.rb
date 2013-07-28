@@ -40,18 +40,21 @@ class CommentLineItemsController < ApplicationController
   # POST /comment_line_items
   # POST /comment_line_items.json
   def create
-    @comment_line_item = CommentLineItem.new(params[:comment_line_item])
-    
-    respond_to do |format|
-      if @comment_line_item.save
-        format.html { redirect_to product_path(@comment_line_item.product_id),
-          notice: 'Comment line item was successfully created.' }
-        format.json { render json: @comment_line_item, status: :created, location: @comment_line_item }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @comment_line_item.errors, status: :unprocessable_entity }
+    if (session[:user_id]) and (User.find_by_id(session[:user_id]).identity == 'customer') 
+      @comment_line_item = CommentLineItem.new(params[:comment_line_item])
+      respond_to do |format|
+        if @comment_line_item.save
+          format.html { redirect_to product_path(@comment_line_item.product_id),
+            notice: 'Comment line item was successfully created.' }
+          format.json { render json: @comment_line_item, status: :created, location: @comment_line_item }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @comment_line_item.errors, status: :unprocessable_entity }
+        end
       end
-    end
+    else
+      redirect_to :back, notice: "Please login as a customer before comment"
+    end  
   end
 
   # PUT /comment_line_items/1

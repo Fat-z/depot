@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :password_digest, :password, :password_confirmation
+  IDENTITY_TYPES = ["customer", "seller"]
+  ALL_IDENTITY_TYPES = ["customer", "seller", "administrator"]
+  attr_accessible :name, :password_digest, :password, :password_confirmation, :identity
+  
+  validates :identity, inclusion: ALL_IDENTITY_TYPES
   validates :name, presence: true, uniqueness: true
   has_secure_password
   

@@ -4,7 +4,6 @@ class CreateCommentLineItems < ActiveRecord::Migration
       t.integer :product_id
       t.integer :comment_id
       t.text :comment_content
-
       t.timestamps
     end
   end

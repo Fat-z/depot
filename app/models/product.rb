@@ -7,10 +7,14 @@ class Product < ActiveRecord::Base
 
   #...
 
-  attr_accessible :description, :image_url, :price, :title
+
+  attr_accessible :description, :image_url, :price, :title, :publish, :repertory
+
   attr :comment_number, true
+
   validates :title, :description, :image_url, presence: true
   validates :price, numericality: {greater_than_or_equal_to: 0.01}
+  validates :repertory, numericality: {greater_than_or_equal_to: 0}
 # 
   validates :title, uniqueness: true
   validates :image_url, allow_blank: true, format: {
@@ -18,6 +22,10 @@ class Product < ActiveRecord::Base
     message: 'must be a URL for GIF, JPG or PNG image.'
   }
   validates :title, length: {minimum: 10}
+
+  def decrease(number)
+      repertory - number
+  end
 
   private
 
@@ -30,4 +38,5 @@ class Product < ActiveRecord::Base
         return false
       end
     end
+
 end
