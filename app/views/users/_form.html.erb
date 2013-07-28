@@ -36,13 +36,15 @@
       </br>
     </div>
     
-    <div>
-      <br>
-      <%= f.label :identity, 'Identity' %>
-      <%= f.select :identity, User::IDENTITY_TYPES,
-            prompt: "Select an identity" %>
-      </br>
-    </div>
+    <% if session[:user_id] == nil %>
+      <div>
+        <br>
+        <%= f.label :identity, 'Identity' %>
+        <%= f.select :identity, User::IDENTITY_TYPES,
+              prompt: "Select an identity" %>
+        </br>
+      </div>
+    <% end %>
 
     <div>
       <%= f.submit %>
