@@ -28,7 +28,7 @@
 
       <% end %>
     <% else %>
-      <% if User.find_by_id(session[:user_id]).name == Product.find_by_id(product).publish  %>
+      <% if User.find_by_id(session[:user_id]).name == Product.find_by_id(product).publish or User.find_by_id(session[:user_id]).identity == 'administrator' %>
         <%= button_to 'Edit', edit_product_path(id: product), method: :get %>
         <%= button_to 'Delete', product_path(id: product), method: :delete %>
       <% end %>
@@ -41,7 +41,7 @@
   </div>
 <% end %>
 
-<% if session[:user_id] != nil and User.find_by_id(session[:user_id]).identity == "seller" %>
+<% if session[:user_id] != nil and User.find_by_id(session[:user_id]).identity != "customer" %>
   <div class="button_publish">
   <%= button_to 'Publish New Product', new_product_path, method: :get %>
   </div>

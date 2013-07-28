@@ -53,11 +53,13 @@
 		</ul>
 		
 		<% if session[:user_id] %>
-		  <% if User.find_by_id(session[:user_id]).identity == "seller" %>
+		  <% if User.find_by_id(session[:user_id]).identity != "customer" %>
 		  <ul>
 		  	<li><%= link_to 'Orders',   orders_path   %></li>
 		  	<li><%= link_to 'Products', products_path %></li>
-		  <!--	<li><%= link_to 'Users',    users_path    %></li>  -->
+		  	<% if User.find_by_id(session[:user_id]).identity == "administrator" %>
+		  		<li><%= link_to 'Users',    users_path    %></li>
+		  	<% end %>
 		  </ul>
 		  <% end %>
 		  <font color=white size=3>

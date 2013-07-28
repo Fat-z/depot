@@ -2,7 +2,11 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.where(publish: User.find_by_id(session[:user_id]).name)
+    if User.find_by_id(session[:user_id]).identity == "administrator"
+      @products = Product.all
+    else
+      @products = Product.where(publish: User.find_by_id(session[:user_id]).name)
+    end
     #@products = Product.all
 
     respond_to do |format|
