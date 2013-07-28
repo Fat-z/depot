@@ -2,7 +2,12 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    if User.find_by_id(session[:user_id]).identity == "administrator"
+      @products = Product.all
+    else
+      @products = Product.where(publish: User.find_by_id(session[:user_id]).name)
+    end
+    #@products = Product.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,7 +46,9 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(params[:product])
-
+    if session[:user_id] != nil
+      @product.publish = User.find_by_id(session[:user_id]).name
+    end
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -76,7 +83,7 @@ class ProductsController < ApplicationController
     @product.destroy
 
     respond_to do |format|
-      format.html { redirect_to products_url }
+      format.html { redirect_to store_url }
       format.json { head :no_content }
     end
   end

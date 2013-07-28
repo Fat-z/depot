@@ -36,10 +36,10 @@ class OrdersControllerTest < ActionController::TestCase
     assert_redirected_to store_path
   end
 
-  test "should show order" do
-    get :show, id: @order
-    assert_response :success
-  end
+  #test "should show order" do
+  #  get :show, id: @order
+  #  assert_response :success
+  #end
 
   test "should get edit" do
     get :edit, id: @order

@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 
+
+<p><%= image_tag(@product.image_url) %></p>
+
 <p>
   <b>Title:</b>
   <%= @product.title %>
@@ -18,6 +21,11 @@
 <p>
   <b>Price:</b>
   <%= @product.price %>
+</p>
+
+<p>
+  <b>Repertory:</b>
+  <%= @product.repertory %>
 </p>
 
 

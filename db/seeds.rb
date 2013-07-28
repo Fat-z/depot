@@ -6,13 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Product.delete_all
-User.delete_all
-
-User.create(name: 'web112',
-  password: '123',
-  password_digest: '$2a$10$twJAgHswDY5XT1rrBrgM3.bEQEiT7MdD03nv.4Vv.EW1cNFakA7Iu',
-)
-
 Product.create(title: 'CoffeeScript',
   description: 
     %{<p>
@@ -22,8 +15,9 @@ Product.create(title: 'CoffeeScript',
   shows you how to hold onto all the power and flexibility of JavaScript
   while writing clearer, cleaner, and safer code.
       </p>},
-  image_url:   'cs.jpg',
-  price: 36.00)
+  image_url:   'cs.jpg',    
+  price: 36.00,
+  publish: 'zhan63906')
 # . . .
 Product.create(title: 'Programming Ruby 1.9',
   description:
@@ -33,7 +27,8 @@ Product.create(title: 'Programming Ruby 1.9',
         you should add Ruby to your toolbox.
       </p>},
   image_url: 'ruby.jpg',
-  price: 49.95)
+  price: 49.95,
+  publish: 'zhan63906')
 # . . .
 
 Product.create(title: 'Rails Test Prescriptions',
@@ -47,83 +42,5 @@ Product.create(title: 'Rails Test Prescriptions',
         including Cucumber, Shoulda, Machinist, Mocha, and Rcov.
       </p>},
   image_url: 'rtp.jpg',
-  price: 34.95)
-  
-Product.create(title: 'Sherlock Holmes',
-  description: 
-    %{<p>
-        Since his first appearance in Beeton's Christmas Annual in 1887, 
-        Sir Arthur Conan Doyle's Sherlock Holmes has been one of the most beloved 
-        fictional characters ever created. Now, in two volumes, this new Bantam edition 
-        presents all 56 short stories and 4 novels featuring Conan Doyle's classic hero
-        truly complete collection now available in paperback! Volume I includes 
-        the early novel, A Study in Scarlet, that introduced the eccentric genius of 
-        Sherlock Holmes to the world. This baffling murder mystery, with the cryptic 
-        word Rache written in blood, first brought Holmes with Dr. John Watson. 
-      </p>},
-  image_url: 'sherlock.jpg',
-  price: 21.95) 
-  
-Product.create(title: 'AP U.S. History',
-  description: 
-    %{<p>
-      Completely revised and updated, this new edition reflects major changes 
-      that have occurred on the AP World History exam since Fall 2011. Two 
-      full-length model exams with answer keys Detailed advice on answering 
-      the comparative essay question Strategies for answering the test s 
-      multiple-choice and document-based questions A review of world history, 
-      from the foundations of civilization circa. 8000 B.C. to world cultures 
-      of the twenty-first century.
-      </p>},
-  image_url: 'us.jpg',
-  price: 98.10)
-  
-Product.create(title: 'Business Model Generation',
-  description: 
-    %{<p>
-      You're holding a handbook for visionaries, game changers, and challengers
-      striving to defy outmoded business models and design tomorrow's 
-      enterprises. It's a book for the business model generation. 
-      </p>},
-  image_url: 'business.jpg',
-  price: 177.00)
-  
-Product.create(title: 'PHR/SPHR',
-  description: 
-    %{<p>
-    Updated edition of best-selling guide for PHR and SPHR candidates The 
-    demand for qualified human resources professionals is on the rise. The new 
-    Professional in Human Resources (PHR) and Senior Professional in Human 
-    Resources (SPHR) exams from the Human Resources Certification Institute (HRCI) 
-    reflect the evolving industry standards for determining competence in the field 
-    of HR. This new edition of the leading PHR/SPHR Study Guide reflects those 
-    changes. Serving as an ideal resource for HR professionals who are seeking 
-    to validate their skills and knowledge, this updated edition helps those 
-    professionals prepare for these challenging exams. Features study tools that 
-    are designed to reinforce understanding of key functional areas Provides access 
-    to bonus materials, including a practice exam for the PHR as well as one for the SPHR.
-      </p>},
-  image_url: 'php.jpg',
-  price: 55.45)
-
-Product.create(title: 'Fifty Great Short Stories',
-  description: 
-    %{<p>
-    50 Great Short Stories is a comprehensive selection from the world's finest 
-    short fiction. The authors represented range from Hawthorne, Maupassant, and 
-    Poe, through Henry James, Conrad, Aldous Huxley, and James Joyce, to Hemingway, 
-    Katherine Anne Porter, Faulkner, E.B. 
-      </p>},
-  image_url: 'story.jpg',
-  price: 24.75)
-  
-Product.create(title: 'Eat and Run',
-  description: 
-    %{<p>
-      Isolated by Mexico's deadly Copper Canyons, the blissful Tarahumara 
-      Indians of have honed the ability to run hundreds of miles without rest 
-      or injury. In a riveting narrative, award-winning journalist and 
-      often-injured runner, Chris McDougall sets out to discover their secrets. 
-      </p>},
-  image_url: 'eat.jpg',
-  price: 34.95)  
+  price: 34.95,
+  publish: 'zhan041247')

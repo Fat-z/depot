@@ -2,21 +2,30 @@
 <div class = "cart_title"><%= t('.title') %></div>
 
 <table>
+<!-- START_HIGHLIGHT -->
   <%= render(cart.line_items) %>
+<!-- END_HIGHLIGHT -->
 
   <tr class="total_line">
     <td colspan="2">Total</td>
-
+<!-- START_HIGHLIGHT -->
     <td class="total_cell"><%= number_to_currency(cart.total_price) %></td>
-
+<!-- END_HIGHLIGHT -->
   </tr>
 
 </table>
 
-
+<!-- START_HIGHLIGHT -->
 
 <%= button_to t('.checkout'), new_order_path, method: :get %>
 <%= button_to t('.empty'), cart, method: :delete,
 	confirm: 'Are you sure?' %>
+<!--
+<%= button_to "Checkout", new_order_path, method: :get %>
+
+<%= button_to 'Empty cart', cart, method: :delete,
+#END_HIGHLIGHT
+    data: { confirm: 'Are you sure?' } %>
+  -->
 
 

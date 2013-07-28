@@ -7,6 +7,9 @@ class OrdersController < ApplicationController
     @orders = Order.paginate page: params[:page], order: 'created_at desc',
       per_page: 10
       
+    @line_items = LineItem.paginate page: params[:page], order: 'created_at desc',
+      per_page: 10
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @orders }
@@ -17,6 +20,7 @@ class OrdersController < ApplicationController
   # GET /orders/1.json
   def show
     @order = Order.find(params[:id])
+    @orders_all = Order.all
 
     respond_to do |format|
       format.html # show.html.erb

@@ -4,17 +4,11 @@
 ca:
   layouts:
     application:
-      title:      "商品书架"
-      search:     "查询"
-      orders:     "订单"
-      products:   "商品"
-      users:      "用户"
+      title:      "网络书店"
       home:       "主页"
       questions:  "问题"
       news:       "资讯"
       contact:    "联系人"
-      logout:     "退出"
-      logIn:      "管理员登录"
   store:
     index:
       title_html: "商品目录"

@@ -19,19 +19,31 @@
   	
     <div>
       <%= f.label :name %>
-      <%= f.text_field :name, size: 40 %>
+      <%= f.text_field :name, size: 39 %>
     </div>
     
     <div>
+      <br>
       <%= f.label :password, 'Password' %>
       <%= f.password_field :password, size: 40  %>
+      </br>
     </div>
     
     <div>
+      <br>
       <%= f.label :password_confirmation, 'Confirm' %>
       <%= f.password_field :password_confirmation, size: 40 %>
+      </br>
     </div>
     
+    <div>
+      <br>
+      <%= f.label :identity, 'Identity' %>
+      <%= f.select :identity, User::IDENTITY_TYPES,
+            prompt: "Select an identity" %>
+      </br>
+    </div>
+
     <div>
       <%= f.submit %>
     </div>

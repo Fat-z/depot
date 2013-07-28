@@ -7,6 +7,7 @@ class StoreController < ApplicationController
      end
 
     @products = Product.order(:title)
+  
     @cart = current_cart
 
     if params[:search] and params[:search].lstrip != ""

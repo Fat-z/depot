@@ -2,17 +2,11 @@ es:
   layouts:
     application:
       title:      "Publications de Pragmatic"
-      search:     "Consulta"
-      orders:     "Orden"
-      products:   "Productos"
-      users:      "Usuario"
       home:       "Inicio"
       questions:  "Preguntas"
       news:       "Noticias"
       contact:    "Contacto"
-      logout:     "Salir"
-      logIn:      "Admin Registro"
-            
+      
   store:
     index:
       title_html: "Su Cat&aacute;logo de Pragmatic"

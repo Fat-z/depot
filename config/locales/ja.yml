@@ -4,18 +4,11 @@
 ja:
   layouts:
     application:
-      title:      "商品本棚"
-      search:     "調査"
-      orders:     "注文"
-      products:   "商品"
-      users:      "ユーザー"
-      home:       "ホームページ"
+      title:      "ネット書店"
+      home:   "ホームページ"
       questions:  "問題"
       news:       "ニュース"
       contact:    "コンタクト"
-      logout:     "名目"
-      logIn:      "管理人 登録"
-     
   store:
     index:
       title_html: "商品カタログ"
