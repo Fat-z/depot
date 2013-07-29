@@ -17,7 +17,9 @@ Product.create(title: 'CoffeeScript',
       </p>},
   image_url:   'cs.jpg',    
   price: 36.00,
-  publish: 'zhan63906')
+  publish: 'zhan63906',
+  repertory: 3,
+  temprepertory: 3)
 # . . .
 Product.create(title: 'Programming Ruby 1.9',
   description:
@@ -28,7 +30,9 @@ Product.create(title: 'Programming Ruby 1.9',
       </p>},
   image_url: 'ruby.jpg',
   price: 49.95,
-  publish: 'zhan63906')
+  publish: 'zhan63906',
+  repertory: 3,
+  temprepertory: 3)
 # . . .
 
 Product.create(title: 'Rails Test Prescriptions',
@@ -43,4 +47,6 @@ Product.create(title: 'Rails Test Prescriptions',
       </p>},
   image_url: 'rtp.jpg',
   price: 34.95,
-  publish: 'zhan041247')
+  publish: 'zhan041247',
+  repertory: 3,
+  temprepertory: 3)

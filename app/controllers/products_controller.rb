@@ -48,6 +48,7 @@ class ProductsController < ApplicationController
     @product = Product.new(params[:product])
     if session[:user_id] != nil
       @product.publish = User.find_by_id(session[:user_id]).name
+      @product.temprepertory = @product.repertory
     end
     respond_to do |format|
       if @product.save
@@ -74,6 +75,8 @@ class ProductsController < ApplicationController
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
+    @product.temprepertory = @product.repertory
+    @product.save
   end
 
   # DELETE /products/1

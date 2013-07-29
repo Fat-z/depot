@@ -13,11 +13,11 @@
     <div class="price_line">
 <!-- START:currency -->
       	<span class="price"><%= number_to_currency(product.price) %> 
-        &nbsp;&nbsp;Repertory:<%= product.repertory %> 
+        &nbsp;&nbsp;Repertory:<%= product.temprepertory %> 
         </span>
 <!-- START_HIGHLIGHT -->
     <%if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity == "customer" %>
-      <% if product.repertory > 0 %>  
+      <% if product.temprepertory > 0 %>  
 
   		  <%= button_to t('.add_html'), line_items_path(product_id: product),
   			   remote: true %>

@@ -80,6 +80,16 @@ class CartsController < ApplicationController
   # DELETE /carts/1.json
   def destroy
     @cart = current_cart
+    @line_item = @cart.line_items
+  
+    @line_item.each do |item|
+      @product = Product.find_by_id(item.product_id)
+
+      @product.temprepertory += item.quantity
+      @product.save   
+    end
+
+
     @cart.destroy
     session[:cart_id] = nil
 
@@ -88,4 +98,5 @@ class CartsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end

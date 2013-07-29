@@ -9,6 +9,7 @@ class StoreController < ApplicationController
     @products = Product.order(:title)
   
     @cart = current_cart
+    
 
     if params[:search] and params[:search].lstrip != ""
       #product = Product.where("title = ?", params[:search])

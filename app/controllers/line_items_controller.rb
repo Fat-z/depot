@@ -14,9 +14,14 @@ class LineItemsController < ApplicationController
   def index
     @line_items = LineItem.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @line_items }
+    if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity != "administrator" 
+      redirect_to store_path 
+    else 
+
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @line_items }
+      end
     end
   end
 
@@ -52,19 +57,26 @@ class LineItemsController < ApplicationController
   def create
     @cart = current_cart
     product = Product.find(params[:product_id])
-    @line_item = @cart.add_product(product.id)
-    @line_item.product = product
 
-    respond_to do |format|
-      if @line_item.save
-        format.html { redirect_to store_url }
-        format.js   { @current_item = @line_item }
-        format.json { render json: @line_item,
-          status: :created, location: @line_item }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @line_item.errors,
-          status: :unprocessable_entity }
+    if product.temprepertory > 0
+      @line_item = @cart.add_product(product.id)
+      @line_item.product = product
+
+      respond_to do |format|
+        if @line_item.save
+
+          product.temprepertory -= 1
+          product.save
+
+          format.html { redirect_to store_url }
+          format.js   { @current_item = @line_item }
+          format.json { render json: @line_item,
+            status: :created, location: @line_item }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @line_item.errors,
+            status: :unprocessable_entity }
+        end
       end
     end
   end
