@@ -57,6 +57,8 @@ module Depot
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
+    config.assets.initialize_on_precompile=false
+    
     config.assets.version = '1.0'
     
     config.action_mailer.default_url_options = { :host => 'myapp.herokuapp.com' }
