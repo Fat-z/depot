@@ -12,11 +12,15 @@ class LineItemsController < ApplicationController
   # GET /line_items
   # GET /line_items.json
   def index
-    @line_items = LineItem.all
+    if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity != "administrator"
+      redirect_to store_path
+    else
+      @line_items = LineItem.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @line_items }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @line_items }    
+      end
     end
   end
 

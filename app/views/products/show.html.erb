@@ -8,7 +8,11 @@
     <b>Title:</b>
       <%= @product.title %>
     </p>
-  
+  	
+  	<p>
+  		<b>Category:</b>
+  		<%= @product.category %>
+  	</p>
     <p>
     <b>Price:</b>
       <%= number_to_currency(@product.price) %>

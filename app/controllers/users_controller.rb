@@ -3,11 +3,16 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.order(:name)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
+    
+    if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity != "administrator"
+      redirect_to store_path
+    else 
+      @users = User.order(:name)
+  
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @users }
+      end
     end
   end
 

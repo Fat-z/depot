@@ -28,6 +28,13 @@
     <%= f.label :image_url %><br />
     <%= f.text_field :image_url %>
   </div>
+  
+  <div>
+    <%= f.label :category%><br />
+    <%= f.select :category, Product::PRODUCT_CATEGORY,
+    				prompt: "Select a product category" %>
+  </div>
+    
   <div class="field">
     <%= f.label :price %><br />
     <%= f.text_field :price %>
