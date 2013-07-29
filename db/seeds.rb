@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Product.delete_all
 User.delete_all
+Cart.delete_all
 
 User.create(name: 'zhan',
   password: '123',
