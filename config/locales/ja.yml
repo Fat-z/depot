@@ -5,21 +5,43 @@ ja:
   layouts:
     application:
       title:      "ネット書店"
+      search:     "調査"
+      orders:     "注文"
+      products:   "商品"
+      users:      "ユーザー"       
+      literature: "文学"
+      science:    "技術"
+      life:       "生活"
+      culture:    "文化" 
+      economic:   "経済"        
+      customer:   "バイヤー"
+      seller:     "売り手"
+      administrator:  "管理人"        
+      edit:       "編集" 
+      logout:     "名目"
+      login:      "登録"
+      create:     "登記"   
       home:   "ホームページ"
       questions:  "問題"
       news:       "ニュース"
       contact:    "コンタクト"
+  
   store:
     index:
       title_html: "商品カタログ"
       add_html:   "添加ショッピングカート" 
-  
+      repertory:  "現存する"
+      edit:       "編集"
+      delete:     "削除"
+      publish:    "新規商品"  
+        
   carts:
     cart:
       title:      "あなたのショッピングカート"
       empty:      "靑空のショッピングカート"
       checkout:   "支払い"
-  
+      modify:     "改正"
+        
   number:
     currency:
       format:

@@ -5,21 +5,43 @@ en:
   layouts:
     application:
       title:      "Pragmatic Bookshelf"
-      home:   "Home"
+      home:       "Home"
+      search:     "Search"
+      orders:     "Orders"
+      products:   "Products"
+      users:      "Users"
+      literature: "Literature"
+      science:    "Science"
+      life:       "Life"
+      culture:    "Culture" 
+      economic:   "Economic"
+      customer:   "Customer"
+      seller:     "Seller"
+      administrator:  "Administrator"      
+      edit:       "Edit" 
+      logout:     "Logout"
+      login:      "Login"
+      create:     "SignUp"      
       questions:  "Questions"
       news:       "News"
       contact:    "Contact"
+  
   store:
     index:
       title_html: "Your Pragmatic Catalog"
       add_html:   "Add to Cart" 
-  
+      repertory:  "Repertory"
+      edit:       "Edit"
+      delete:     "Delete"
+      publish:    "Publish New Product"
+      
   carts:
     cart:
       title:      "Your cart"
       empty:      "Empty cart"
       checkout:   "Checkout"
-  
+      modify:     "Modify"
+        
   number:
     currency:
       format:

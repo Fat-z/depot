@@ -5,20 +5,42 @@ ca:
   layouts:
     application:
       title:      "网络书店"
+      search:     "查询"
+      orders:     "订单"
+      products:   "商品"
+      users:      "用户"   
+      literature: "文学"
+      science:    "科技"
+      life:       "生活"
+      culture:    "文化" 
+      economic:   "经管"      
+      customer:   "买家"
+      seller:     "卖家"
+      administrator:  "管理员"          
+      edit:       "编辑" 
+      logout:     "退出"
+      login:      "登录"
+      create:     "注册"             
       home:       "主页"
       questions:  "问题"
       news:       "资讯"
       contact:    "联系人"
+  
   store:
     index:
       title_html: "商品目录"
       add_html:   "添加到购物车" 
+      repertory:  "存货"
+      edit:       "编辑"
+      delete:     "删除"
+      publish:    "新建商品"  
   
   carts:
     cart:
       title:      "你的购物车"
       empty:      "清空购物车"
       checkout:   "结帐"
+      modify:     "修改"
   
   number:
     currency:

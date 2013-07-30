@@ -20,7 +20,7 @@
 <%= button_to t('.checkout'), new_order_path, method: :get %>
 
 <% if cart.line_items.length != 0 %>
-	<%= button_to 'modify', edit_cart_path(cart), method: :get %>
+	<%= button_to t('.modify'), edit_cart_path(cart), method: :get %>
 <% end %>
 
 <%= button_to t('.empty'), cart, method: :delete,
