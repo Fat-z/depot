@@ -34,9 +34,16 @@
       <%= link_to 'Back', products_path %>
 
     <% end %>
-    
     <div>
-    <%= button_to "Add to Cart", line_items_path(:product_id => @product), remote: true%>
+    <% if session[:user_id] and(User.find_by_id(session[:user_id]).identity == "customer") %>
+		    
+      <% if @product.repertory > 0 %>  
+	    <%= button_to "Add to Cart", line_items_path(:product_id => @product, :cart_id => @cart.id), remote: true %>
+	  <% else %>
+	    <font color="red", size="3">Sorry for the product's stockout!</font>
+	  <% end %>
+	<% end %>
+    
     </div>	
     <br><br />
     <br><br />
