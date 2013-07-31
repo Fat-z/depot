@@ -1,0 +1,87 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ja:
+  layouts:
+    application:
+      title:      "ネット書店"
+      search:     "調査"
+      orders:     "注文"
+      products:   "商品"
+      users:      "ユーザー"       
+      literature: "文学"
+      science:    "技術"
+      life:       "生活"
+      culture:    "文化" 
+      economic:   "経済"        
+      customer:   "バイヤー"
+      seller:     "売り手"
+      administrator:  "管理人"        
+      edit:       "編集" 
+      logout:     "名目"
+      login:      "登録"
+      create:     "登記"   
+      home:   "ホームページ"
+      questions:  "問題"
+      news:       "ニュース"
+      contact:    "コンタクト"
+  
+  store:
+    index:
+      title_html: "商品カタログ"
+      add_html:   "添加ショッピングカート" 
+      repertory:  "現存する"
+      edit:       "編集"
+      delete:     "削除"
+      publish:    "新規商品"  
+        
+  carts:
+    cart:
+      title:      "あなたのショッピングカート"
+      empty:      "靑空のショッピングカート"
+      checkout:   "支払い"
+      modify:     "改正"
+        
+  number:
+    currency:
+      format:
+        unit:   "￥"
+        precision:  2
+        separator:  "."
+        delimiter:  ","
+        format:      "%u%n"
+  
+  orders:
+    new:
+      legend:           "詳細を入力してください"
+    form:
+      name:             "名前"
+      address_html:     "アドレス"
+      email:            "電子メール"
+      pay_type:         "支払い方式"
+      pay_prompt_html:  "選択の支払い方法"
+      submit:             "すぐお支払い"
+      
+      
+  activerecord:
+    models:
+      order:         "フィールド"
+    attributes:
+      order:
+        address:     "アドレス"
+        name:        "名前"
+        email:       "電子メール"
+        pay_type:    "支払い方式"
+    errors:
+      messages:
+        inclusion: "選択されていない"
+        blank:      "空にすることはできません"
+     
+  errors:
+    template:
+        body:       "問題の次のフィールド:"
+        header:
+          one:      "1 エラー  %{model}"
+          other:    "%{count} エラー  %{model}"   
+          
+  thanks:     "ありがとうございます"

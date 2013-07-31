@@ -2,35 +2,93 @@
 <html>
 <head>
   <title>Pragprog Books Online Store</title>
-  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= stylesheet_link_tag  "application" %>
   <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  <%= csrf_meta_tag %>
 </head>
-
 <body class="<%= controller.controller_name %>">
-  <div id="banner">
-    <%= image_tag("logo.png") %>
-    <%= @page_title || "Pragmatic Bookshelf" %>
-  </div>
-  <div id="columns">
-    <div id="side">
 
-      <% if @cart %>
-        <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
-          <%= render @cart %>
-        <% end %>
-      <% end %>
+<div id="banner">
+	
+	<%= form_tag store_path, class: 'locale' do %>
+		<%= select_tag 'set_locale',
+			options_for_select(LANGUAGES, I18n.locale.to_s),
+			onchange: 'this.form.submit()' %>
+		<%= submit_tag 'submit'%>
+		<%= javascript_tag "$('.locale input').hide()" %>
+	<% end %>
+		
+	<%= image_tag("logo.png") %>
+	<%= @page_title || t('.title') %>
+	<!--<%= @page_title || "Pragmatic Bookshelf" %>-->
+</div>
+<div id="columns">
+	<div id="side">
+		
+		<%= form_tag store_path do %>
+			<div class = "field">
+				<%= text_field_tag 'search'%>
+				<%= submit_tag t('.search') %>
+				<br />
+			</div>
+		<% end %>
+		
+		<% if @cart %>
+     		<%= hidden_div_if(@cart.line_items.empty?, id:'cart') do%>
+	    		<%= render @cart %>
+		    <% end %>
+		<% end %>    
+		
+		<ul>
+			<li> <a href=/><%= t('.home') %></a> </li>
+			<li> <a href="http://www.baidu.com"><%= t('.questions') %></a> </li>
+			<li> <a href="http://www.baidu.com"><%= t('.news') %></a> </li>
+			<li> <a href="http://www.baidu.com"><%= t('.contact') %></a> </li>
+		</ul>
+		
+		<div>
+			<ul>
+				<% for item in Product::PRODUCT_CATEGORY %>
+					<li><%= link_to( t(".#{item}"), {:controller =>'store',:action => 'index',:catagory => item} ) %></li>
+				<% end %>
+			</ul>	
+		</div>
+				
+		<% if session[:user_id] %>
+		  <% if User.find_by_id(session[:user_id]).identity != "customer" %>
+		  <ul>
+		  	<li><%= link_to t('.orders'),   orders_path   %></li>
+		  	<li><%= link_to t('.products'), products_path %></li>
+		  	<% if User.find_by_id(session[:user_id]).identity == "administrator" %>
+		  		<li><%= link_to t('.users'),    users_path    %></li>
+		  	<% end %>
+		  </ul>
+		  <% end %>
+		  <font color=white size=3>
+		  	<%= t(".#{User.find_by_id(session[:user_id]).identity}") %> :
+		  	<br/>
+		  	<%= User.find_by_id(session[:user_id]).name %>
+		  	<br/>
+		  	<% if session[:user_id] != nil and User.find(session[:user_id]).identity == "customer" %>
+		  		<%= link_to t('.orders'),   orders_path   %><br/>
+			  	<%= link_to 'My Carts', carts_path %>
+			  	</br/>
+		  	<% end %>
+		  </font>
 
-      <ul>
-        <li><a href="http://www....">Home</a></li>
-        <li><a href="http://www..../faq">Questions</a></li>
-        <li><a href="http://www..../news">News</a></li>
-        <li><a href="http://www..../contact">Contact</a></li>
-      </ul>
-    </div>
-    <div id="main">
+		  <%= button_to t('.edit'), edit_user_path(id: session[:user_id]), method: :get %>
+		  <%= button_to t('.logout'), logout_path, method: :delete %>  
+
+		<% else %>
+			<%= button_to t('.login'), login_path, method: :get %>
+			<%= button_to t('.create'), new_user_path, method: :get %>
+
+		<% end %>
+
+	</div>
+	<div id="main">			
       <%= yield %>
     </div>
-  </div>
+   </div>     
 </body>
 </html>

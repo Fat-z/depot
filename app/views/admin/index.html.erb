@@ -1,0 +1,32 @@
+<h1>Welcome</h1>
+
+<br> Dear <%= User.find_by_id(session[:user_id]).identity %>: </br>
+<br> <%= User.find_by_id(session[:user_id]).name %> </br>
+
+<br> It's <%= Time.now %> </br>
+
+<% if User.find_by_id(session[:user_id]).identity == "customer" %>
+	<br>We have <%= pluralize(@total_products_C, "product") %> for you to choose. </br>
+<% else %>
+	<% if User.find_by_id(session[:user_id]).identity == "seller" %>
+		<br>You have published <%= pluralize(@total_products_S, "product") %>.</br>
+		<br>And you still have <%= pluralize(@order_number, "order") %> need to be charged.</br>
+	<% else %>
+		<br> There are <%= pluralize(@total_products_C, "product") %></br>
+		<br> <%= pluralize(@total_lineitems, "line_item") %></br>
+		<br> <%= pluralize(@total_order_number, "order") %></br>
+		<br> <%= pluralize(@total_user_number, "user") %></br>
+	<% end %>  
+<% end %>
+
+<!--
+
+<% @Line_items.each do |line_item| %>
+	<% if Product.find_by_id(line_item.product_id).publish == User.find_by_id(session[:user_id]).name %>
+	<br>
+		<%= Product.find_by_id(line_item.product_id).title %>
+	</br>
+	<% end %>
+<% end %>
+
+-->

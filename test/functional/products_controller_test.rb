@@ -7,6 +7,7 @@ class ProductsControllerTest < ActionController::TestCase
       title:       'Lorem Ipsum',
       description: 'Wibbles are fun!',
       image_url:   'lorem.jpg',
+      category:     'life',
       price:       19.95
     }
   end
@@ -54,6 +55,6 @@ class ProductsControllerTest < ActionController::TestCase
       delete :destroy, id: @product
     end
 
-    assert_redirected_to products_path
+    assert_redirected_to store_path
   end
 end

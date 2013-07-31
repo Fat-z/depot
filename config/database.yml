@@ -8,6 +8,7 @@ development:
   database: db/development.sqlite3
   pool: 5
   timeout: 5000
+  encoding: utf8
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -17,9 +18,21 @@ test:
   database: db/test.sqlite3
   pool: 5
   timeout: 5000
+  encoding: utf8
 
+#production:
+#  adapter: sqlite3
+#  database: db/production.sqlite3
+#  pool: 5
+#  timeout: 5000
+  
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 5
-  timeout: 5000
+  adapter:    mysql
+  encoding:   utf8
+  reconnect:  false
+  database:   depot_production
+  pool:       5
+  username:   root
+  password:   1234
+  host:       localhost
+  encoding: utf8

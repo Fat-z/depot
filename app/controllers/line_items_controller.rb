@@ -7,58 +7,88 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
 class LineItemsController < ApplicationController
+  skip_before_filter :authorize, only: :create
+  
   # GET /line_items
   # GET /line_items.json
   def index
-    @line_items = LineItem.all
+    if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity != "administrator"
+      redirect_to store_path
+    else
+      @line_items = LineItem.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @line_items }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @line_items }    
+      end
     end
   end
 
   # GET /line_items/1
   # GET /line_items/1.json
   def show
-    @line_item = LineItem.find(params[:id])
+    if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity != "administrator"
+      redirect_to store_path
+    else
+      @line_item = LineItem.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @line_item }
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @line_item }
+      end
     end
   end
 
   # GET /line_items/new
   # GET /line_items/new.json
   def new
-    @line_item = LineItem.new
+    if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity != "administrator"
+      redirect_to store_path
+    else
+      @line_item = LineItem.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @line_item }
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @line_item }
+      end
     end
   end
 
   # GET /line_items/1/edit
   def edit
-    @line_item = LineItem.find(params[:id])
+    if session[:user_id] != nil 
+      if User.find(session[:user_id]).identity == "administrator" or session[:user_id] == LineItem.find(params[:id]).order.user_id 
+        @line_item = LineItem.find(params[:id])
+      else
+        redirect_to store_path
+      end
+    else
+      redirect_to store_path
+    end
   end
 
   # POST /line_items
   # POST /line_items.json
   def create
-    @cart = current_cart
-    product = Product.find(params[:product_id])
-    @line_item = @cart.add_product(product.id)
-    @line_item.product = product
+    
+    @cart = Cart.find(params[:cart_id])
+    product = Product.find(params[:product_id]) 
+    if product.temprepertory > 0
+      @line_item = @cart.add_product(product.id)
+      @line_item.product = product
 
+      product.temprepertory -= 1
+      product.save
+    #else
+      #flash[:notice] = "#{product.title} is not enough"
+    end
     respond_to do |format|
       if @line_item.save
         format.html { redirect_to store_url }
         format.js   { @current_item = @line_item }
         format.json { render json: @line_item,
           status: :created, location: @line_item }
+          
       else
         format.html { render action: "new" }
         format.json { render json: @line_item.errors,
@@ -71,14 +101,28 @@ class LineItemsController < ApplicationController
   # PUT /line_items/1.json
   def update
     @line_item = LineItem.find(params[:id])
+    @cart = Cart.find(@line_item.cart_id)
+    @product = @line_item.product
+    @prerepertory = @line_item.pre_repertory
 
     respond_to do |format|
-      if @line_item.update_attributes(params[:line_item])
-        format.html { redirect_to @line_item, notice: 'Line item was successfully updated.' }
-        format.json { head :no_content }
+      
+      if ((1..10) === params[:line_item]["quantity"].to_i) == false
+        format.html { redirect_to edit_cart_path(@cart), notice: 'Unexpected quantity. Valid interval [1..10]' }
+        
+      elsif @line_item.quantity == params[:line_item]["quantity"].to_i
+        format.html { redirect_to edit_cart_path(@cart), notice: 'No change.' }
+      
+      elsif @prerepertory < params[:line_item]["quantity"].to_i
+        format.html { redirect_to edit_cart_path(@cart), notice: 'Repertory not enough.' }  
+      elsif @line_item.update_attributes(params[:line_item])
+        @product.temprepertory = @prerepertory - @line_item.quantity
+        @product.save
+        @cart = current_cart
+        format.html { redirect_to edit_cart_path(@cart), notice: 'Successfully updated.' }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+        @cart = current_cart
+        format.html { redirect_to edit_cart_path(@cart), notice: 'Unsuccessfully update.' }
       end
     end
   end
@@ -86,12 +130,22 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
-    @line_item = LineItem.find(params[:id])
-    @line_item.destroy
-
-    respond_to do |format|
-      format.html { redirect_to line_items_url }
-      format.json { head :no_content }
+    if session[:user_id] != nil 
+      if User.find(session[:user_id]).identity == "administrator" or session[:user_id] == LineItem.find(params[:id]).order.user_id
+        @line_item = LineItem.find(params[:id])
+        @cart = Cart.find(@line_item.cart_id)
+        @line_item.clear_the_item    
+        @line_item.destroy
+        
+        respond_to do |format|
+          format.html { redirect_to edit_cart_path(@cart), notice: 'Remove line_item successfully.' }
+        end
+      else
+        redirect_to store_path
+      end
+    else
+      redirect_to store_path
     end
   end
+
 end

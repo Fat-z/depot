@@ -11,9 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130717083434) do
+ActiveRecord::Schema.define(:version => 20130731181057) do
 
   create_table "carts", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+    t.string   "user_name"
+  end
+
+  create_table "comment_line_items", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "comment_id"
+    t.text     "comment_content"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "comment_user_name"
+  end
+
+  create_table "comments", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -34,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20130717083434) do
     t.string   "pay_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   create_table "products", :force => true do |t|
@@ -41,8 +58,20 @@ ActiveRecord::Schema.define(:version => 20130717083434) do
     t.text     "description"
     t.string   "image_url"
     t.decimal  "price"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.string   "publish"
+    t.integer  "repertory",     :default => 1
+    t.string   "category"
+    t.integer  "temprepertory", :default => 1
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "password_digest"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.string   "identity",        :default => "customer"
   end
 
 end

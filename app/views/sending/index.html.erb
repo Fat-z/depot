@@ -1,0 +1,21 @@
+<br>
+The customer have order <%= @order_number %>  <%= @book_title %>.
+</br>
+
+<br>
+The repertory of this book is <%= @repertory %>.
+</br>
+
+<br>
+<% if @repertory < @order_number %>
+	<font color="red", size="4"> The repertory of <%= @book_title %> is not enough!</font>
+	<%= button_to "add repertory", edit_product_path(id: @line_item.product_id), method: :get %>
+<% else %>
+	<%= button_to "send" , sendout_sending_path(id: @line_item), method: :get  %>
+<% end %>
+</br>
+
+<br>
+<%= button_to "stockout", stockout_sending_path(id: @line_item), method: :get %>
+</br>
+

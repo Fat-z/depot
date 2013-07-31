@@ -1,6 +1,45 @@
 <h1>Editing cart</h1>
 
-<%= render 'form' %>
+<% if notice %>
+	<p id = "notice"><%= notice %></p>
+<% end %>
 
-<%= link_to 'Show', @cart %> |
-<%= link_to 'Back', carts_path %>
+<% if @cart.line_items.length == 0 %>
+	<h3>Your cart is empty</h3>
+	
+<% else %>
+	<table>
+		<tr>
+		    <th>Quantity</th>
+		    <th>Name</th>
+		    <th>Price</th>
+		    <th>Category</th>
+		    <th>Update</th>
+		    <th>Remove</th>
+	  	</tr>
+	  	
+		<% @cart.line_items.each do |line_item|%>
+			<tr>
+				<%= form_for(line_item) do |f|%>
+					  <td><%= f.number_field :quantity, :size => 3 %></td>
+					  <td><%= line_item.product.title %></td>
+					  <td class="item_price"><%= number_to_currency(line_item.total_price) %></td>
+					  <td><%= line_item.product.category %></td>
+					  <td><%= f.submit 'Update'%></td>
+					  <td><%= link_to 'Remove', line_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				<% end %>
+				
+			</tr>
+			<br/>				
+		<% end %>
+		
+		<tr>
+			<td colspan="2">Total</td>
+			<td class="total_cell"><%= number_to_currency(@cart.total_price) %></td>
+		</tr>
+				
+	</table>
+	
+<% end %>
+
+<%= link_to 'Back', store_path %>
