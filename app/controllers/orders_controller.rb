@@ -31,17 +31,23 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.json
   def new
-    @cart = current_cart
-    if @cart.line_items.empty?
+    
+    @cart = nil
+       
+    if (session[:cart_id] != nil)
+      @cart = Cart.find(session[:cart_id])
+    end 
+      
+    if @cart == nil or @cart.line_items.empty?
       redirect_to store_url, notice: "Your cart is empty"
-      return
-    end
-
-    @order = Order.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @order }
+      
+    else
+      @order = Order.new
+  
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @order }
+      end      
     end
   end
 

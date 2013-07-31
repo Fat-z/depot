@@ -1,4 +1,9 @@
 class Cart < ActiveRecord::Base
+  belongs_to  :user
+  attr_accessible :user_id, :user_name
+  
+  validates :user_id, :user_name, presence: true
+    
   has_many :line_items, dependent: :destroy
 
   def add_product(product_id)
@@ -14,4 +19,5 @@ class Cart < ActiveRecord::Base
   def total_price
     line_items.to_a.sum { |item| item.total_price }
   end
+  
 end

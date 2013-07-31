@@ -54,8 +54,10 @@ class LineItemsController < ApplicationController
   # POST /line_items
   # POST /line_items.json
   def create
-    @cart = current_cart
-    product = Product.find(params[:product_id])
+    
+    @cart = Cart.find(params[:cart_id])
+    product = Product.find(params[:product_id]) 
+    
     @line_item = @cart.add_product(product.id)
     @line_item.product = product
 
@@ -65,6 +67,7 @@ class LineItemsController < ApplicationController
         format.js   { @current_item = @line_item }
         format.json { render json: @line_item,
           status: :created, location: @line_item }
+          
       else
         format.html { render action: "new" }
         format.json { render json: @line_item.errors,
@@ -77,7 +80,7 @@ class LineItemsController < ApplicationController
   # PUT /line_items/1.json
   def update
     @line_item = LineItem.find(params[:id])
-    @cart = current_cart
+    @cart = Cart.find(@line_item.cart_id)
     
     respond_to do |format|
       
@@ -101,8 +104,8 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1.json
   def destroy
     @line_item = LineItem.find(params[:id])
+    @cart = Cart.find(@line_item.cart_id)    
     @line_item.destroy
-    @cart = current_cart
     
     respond_to do |format|
       format.html { redirect_to edit_cart_path(@cart), notice: 'Remove line_item successfully.' }

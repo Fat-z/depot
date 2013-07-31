@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many  :carts, dependent:  :destroy
+  
   IDENTITY_TYPES = ["customer", "seller"]
   ALL_IDENTITY_TYPES = ["customer", "seller", "administrator"]
   attr_accessible :name, :password_digest, :password, :password_confirmation, :identity

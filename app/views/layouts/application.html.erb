@@ -65,12 +65,12 @@
 		  </ul>
 		  <% end %>
 		  <font color=white size=3>
-		  	<br>
-		  		<%= t(".#{User.find_by_id(session[:user_id]).identity}") %> :
-		  	</br>
-		  	<br>
-		  		<%= User.find_by_id(session[:user_id]).name %>
-		  	</br>
+		  	<%= t(".#{User.find_by_id(session[:user_id]).identity}") %> :
+		  	<br/>
+		  	<%= User.find_by_id(session[:user_id]).name %>
+		  	<br/>
+		  	<%= link_to 'My Carts', carts_path %>
+		  	</br/>
 		  </font>
 
 		  <%= button_to t('.edit'), edit_user_path(id: session[:user_id]), method: :get %>

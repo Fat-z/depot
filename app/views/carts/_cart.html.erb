@@ -1,36 +1,24 @@
-<!--<div class="cart_title">Your Cart</div>-->
 <div class = "cart_title"><%= t('.title') %></div>
 
 <table>
-<!-- START_HIGHLIGHT -->
   <%= render(cart.line_items) %>
-<!-- END_HIGHLIGHT -->
 
   <tr class="total_line">
     <td colspan="2">Total</td>
-<!-- START_HIGHLIGHT -->
     <td class="total_cell"><%= number_to_currency(cart.total_price) %></td>
-<!-- END_HIGHLIGHT -->
   </tr>
 
 </table>
 
-<!-- START_HIGHLIGHT -->
-
-<%= button_to t('.checkout'), new_order_path, method: :get %>
-
-<% if cart.line_items.length != 0 %>
-	<%= button_to t('.modify'), edit_cart_path(cart), method: :get %>
-<% end %>
-
-<%= button_to t('.empty'), cart, method: :delete,
-	confirm: 'Are you sure?' %>
-<!--
-<%= button_to "Checkout", new_order_path, method: :get %>
-
-<%= button_to 'Empty cart', cart, method: :delete,
-#END_HIGHLIGHT
-    data: { confirm: 'Are you sure?' } %>
-  -->
-
-
+<% if cart.user_id == session[:user_id] %>
+	<%= button_to t('.checkout'), new_order_path, method: :get %>
+	<!--<%= button_to t('.checkout'), {:controller => 'orders', :action => 'new', :id => cart.id}, method: :get %>-->
+	
+	<% if cart.line_items.length != 0 %>
+		<%= button_to t('.modify'), edit_cart_path(cart), method: :get %>
+	<% end %>
+	
+	<%= button_to t('.empty'), empty_cart_path(cart), method: :get,
+		confirm: 'Are you sure?' %>
+		
+<% end %>	

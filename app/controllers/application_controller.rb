@@ -7,11 +7,21 @@ class ApplicationController < ActionController::Base
   
     def current_cart
       Cart.find(session[:cart_id])
+      
     rescue ActiveRecord::RecordNotFound
-      cart = Cart.create
-      session[:cart_id] = cart.id
+      cart = nil
+      if session[:user_id] != nil and User.find(session[:user_id]).identity == "customer"
+        cart = Cart.where(user_id: session[:user_id]).last
+        
+        if cart == nil
+          cart = Cart.create(user_id: session[:user_id], user_name: session[:user_name])
+        end
+        
+        session[:cart_id] = cart.id
+      end
       cart  
     end
+    
   protected
   
     def authorize

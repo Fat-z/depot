@@ -39,7 +39,11 @@ Depot::Application.routes.draw do
   
   
     resources :carts
-  
+    
+    resources :carts do
+      get :empty, on: :member
+    end  
+    
     resources :sending do 
       get :stockout, on: :member
       get :sendout, on: :member

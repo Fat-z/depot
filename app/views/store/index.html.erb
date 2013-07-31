@@ -5,6 +5,7 @@
 <h1><%= t('.title_html')%></h1>
 
 <% @products.each do |product| %>
+
   <div class="entry">
     <%= link_to(image_tag(product.image_url),product_path(id: product.id), method: :get )%>
     <h3><%= link_to(product.title, product_path(id: product.id), method: :get )%></h3>
@@ -15,23 +16,25 @@
         &nbsp;&nbsp;<%= t('.repertory') %>:<%= product.repertory %> 
         </span>
 
-    <%if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity == "customer" %>
-      <% if product.repertory > 0 %>  
-
-  		  <%= button_to t('.add_html'), line_items_path(product_id: product),
-  			   remote: true %>
-
-      <% else %>
-
-        <font color="red", size="3">Sorry for the product's stockout!</font>
-
-      <% end %>
-    <% else %>
-      <% if User.find_by_id(session[:user_id]).name == Product.find_by_id(product).publish or User.find_by_id(session[:user_id]).identity == 'administrator' %>
-        <%= button_to t('.edit'), edit_product_path(id: product), method: :get %>
-        <%= button_to t('.delete'), product_path(id: product), method: :delete %>
-      <% end %>
-    <% end %>
+		<% if session[:user_id] != nil %>
+		
+		    <% if User.find_by_id(session[:user_id]).identity == "customer" %>
+		    
+		      <% if product.repertory > 0 %>  
+		  		  <%= button_to t('.add_html'), line_items_path(:product_id => product, :cart_id => @cart.id),
+		  			   remote: true %>
+		      <% else %>
+		        <font color="red", size="3">Sorry for the product's stockout!</font>
+		      <% end %>
+		      
+		    <% elsif User.find_by_id(session[:user_id]).identity == "administrator" or 
+		    	session[:user_name] == product.publish %>
+		    	
+		        <%= button_to t('.edit'), edit_product_path(id: product), method: :get %>
+		        <%= button_to t('.delete'), product_path(id: product), method: :delete %>
+		    <% end %>
+		    
+	    <% end %>	
 
     </div>
   </div>

@@ -13,6 +13,24 @@ LineItem.delete_all
 Product.delete_all
 User.delete_all
 
+User.create(name: 'admin',
+  password: '123',
+  password_confirmation: '123',
+  identity: 'administrator'
+)
+
+User.create(name: 'web112',
+  password: '123',
+  password_confirmation: '123',
+  identity: 'customer'
+)
+
+User.create(name: 'mt',
+  password: '123',
+  password_confirmation: '123',
+  identity: 'customer'
+)
+
 User.create(name: 'zhan',
   password: '123',
   password_confirmation: '123',

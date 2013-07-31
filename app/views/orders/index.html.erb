@@ -18,18 +18,18 @@
 
         <% @line_items.each do |line_item| %>
           <% if Product.find_by_id(line_item.product_id).publish == User.find_by_id(session[:user_id]).name %>
-            <tr>
-              <td><%= Order.find_by_id(line_item.order_id).name %></td>
-              <td><%= Order.find_by_id(line_item.order_id).address %></td>
-              <td><%= Order.find_by_id(line_item.order_id).email %></td>
-              <td><%= Order.find_by_id(line_item.order_id).pay_type %></td>
-              <td><%= Product.find_by_id(line_item.product_id).title %></td>
-              <td><%= line_item.quantity %></td>
-              <td><%= link_to 'Show', Order.find_by_id(line_item.order_id) %></td>
-              <td><%= link_to 'Edit', edit_order_path(Order.find_by_id(line_item.order_id)) %></td>
-              <td><%= link_to 'Destroy', Order.find_by_id(line_item.order_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              <td><%= link_to 'Send', {:controller => "sending", :action => "index", id: line_item} %></td>
-            </tr>
+	            <tr>
+	              <td><%= Order.find_by_id(line_item.order_id).name %></td>
+	              <td><%= Order.find_by_id(line_item.order_id).address %></td>
+	              <td><%= Order.find_by_id(line_item.order_id).email %></td>
+	              <td><%= Order.find_by_id(line_item.order_id).pay_type %></td>
+	              <td><%= Product.find_by_id(line_item.product_id).title %></td>
+	              <td><%= line_item.quantity %></td>
+	              <td><%= link_to 'Show', Order.find_by_id(line_item.order_id) %></td>
+	              <td><%= link_to 'Edit', edit_order_path(Order.find_by_id(line_item.order_id)) %></td>
+	              <td><%= link_to 'Destroy', Order.find_by_id(line_item.order_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	              <td><%= link_to 'Send', {:controller => "sending", :action => "index", id: line_item} %></td>
+	            </tr>
           <% end %>
         <% end %>
 

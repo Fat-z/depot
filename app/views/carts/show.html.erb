@@ -1,12 +1,10 @@
 <% if notice %>
-<p id="notice"><%= notice %></p>
+	<p id="notice"><%= notice %></p>
 <% end %>
 
 <div class="cart_title">Your Cart</div>
 <table>
-<!-- START_HIGHLIGHT -->
   <%= render(@cart.line_items) %>
-<!-- END_HIGHLIGHT -->
 
   <tr class="total_line">
     <td colspan="2">Total</td>
@@ -14,6 +12,3 @@
   </tr>
 
 </table>
-
-<%= button_to 'Empty cart', @cart, method: :delete,
-    data: { confirm: 'Are you sure?' } %>
