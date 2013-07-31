@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130729010802) do
+ActiveRecord::Schema.define(:version => 20130729025824) do
 
   create_table "carts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(:version => 20130729010802) do
     t.integer  "product_id"
     t.integer  "comment_id"
     t.text     "comment_content"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "comment_user_name"
   end
 
   create_table "comments", :force => true do |t|

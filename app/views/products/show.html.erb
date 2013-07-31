@@ -58,7 +58,9 @@
 	    <div id="each_comment">
 	    	<div id="each_comment_content">
 	    		<%= image_tag("customer.jpg", class: 'img') %>
+	    		
 	    		<%= comment.comment_content %>
+	    		
 	    		<%if session[:user_id] and User.find_by_id(session[:user_id]).identity == 'administrator'%>
 	    		    <div id="delete_comment">
 	    		    	<%= link_to 'Delete', comment, confirm: "Are you sure?", method: :delete, 
@@ -66,10 +68,12 @@
 	    		    </div>
 	    		<% end %>
             </div>
-            
+             
+	    		 
             <div id="each_comment_time">
             	posted at: <%= comment.created_at %>
             </div>
+            <%= comment.comment_user_name %>
         </div>
    <%end%>
 </div>
