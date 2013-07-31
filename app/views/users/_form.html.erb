@@ -38,6 +38,13 @@
     
     <div>
       <br>
+      <%= f.label :email, 'Email' %>
+      <%= f.text_field :email, size: 40 %>
+      </br>
+    </div>
+    
+    <div>
+      <br>
       <%= f.label :identity, 'Identity' %>
       <%= f.select :identity, User::IDENTITY_TYPES,
             prompt: "Select an identity" %>

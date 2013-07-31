@@ -1,3 +1,4 @@
+require 'will_paginate/array'
 class StoreController < ApplicationController
   skip_before_filter :authorize
   def index
@@ -12,7 +13,9 @@ class StoreController < ApplicationController
     end
   
     @cart = current_cart
-
+    
+    @products = @products.paginate :page => params[:page], :per_page => 5
+    
     if params[:search] and params[:search].lstrip != ""
       #product = Product.where("title = ?", params[:search])
 
