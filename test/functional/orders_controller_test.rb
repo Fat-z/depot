@@ -45,15 +45,7 @@ class OrdersControllerTest < ActionController::TestCase
 
   test "should get edit" do
     get :edit, id: @order
-     if session[:user_id] != nil
-      if User.find(session[:user_id]).identity == "administrator" or session[:user_id] == @order.user_id
-        assert_response :success
-      else
-        assert_redirected_to store_path
-      end
-    else
-      assert_redirected_to store_path
-    end
+    assert_response :success
   end
 
   test "should update order" do
@@ -61,13 +53,13 @@ class OrdersControllerTest < ActionController::TestCase
     assert_redirected_to order_path(assigns(:order))
   end
 
-  #test "should destroy order" do
-  #  assert_difference('Order.count', -1) do
-  #    delete :destroy, id: @order
-  #  end
+  test "should destroy order" do
+    assert_difference('Order.count', -1) do
+      delete :destroy, id: @order
+    end
 
-   # assert_redirected_to orders_path
-  #end
+    assert_redirected_to orders_path
+  end
 
 
 end

@@ -27,44 +27,28 @@ class LineItemsController < ApplicationController
   # GET /line_items/1
   # GET /line_items/1.json
   def show
-    if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity != "administrator"
-      redirect_to store_path
-    else
-      @line_item = LineItem.find(params[:id])
+    @line_item = LineItem.find(params[:id])
 
-      respond_to do |format|
-        format.html # show.html.erb
-        format.json { render json: @line_item }
-      end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @line_item }
     end
   end
 
   # GET /line_items/new
   # GET /line_items/new.json
   def new
-    if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity != "administrator"
-      redirect_to store_path
-    else
-      @line_item = LineItem.new
+    @line_item = LineItem.new
 
-      respond_to do |format|
-        format.html # new.html.erb
-        format.json { render json: @line_item }
-      end
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @line_item }
     end
   end
 
   # GET /line_items/1/edit
   def edit
-    if session[:user_id] != nil 
-      if User.find(session[:user_id]).identity == "administrator" or session[:user_id] == LineItem.find(params[:id]).order.user_id 
-        @line_item = LineItem.find(params[:id])
-      else
-        redirect_to store_path
-      end
-    else
-      redirect_to store_path
-    end
+    @line_item = LineItem.find(params[:id])
   end
 
   # POST /line_items
@@ -73,21 +57,10 @@ class LineItemsController < ApplicationController
     
     @cart = Cart.find(params[:cart_id])
     product = Product.find(params[:product_id]) 
-<<<<<<< HEAD
     
     @line_item = @cart.add_product(product.id)
     @line_item.product = product
-=======
-    if product.temprepertory > 0
-      @line_item = @cart.add_product(product.id)
-      @line_item.product = product
->>>>>>> origin/dev3
 
-      product.temprepertory -= 1
-      product.save
-    #else
-      #flash[:notice] = "#{product.title} is not enough"
-    end
     respond_to do |format|
       if @line_item.save
         format.html { redirect_to store_url }
@@ -108,13 +81,7 @@ class LineItemsController < ApplicationController
   def update
     @line_item = LineItem.find(params[:id])
     @cart = Cart.find(@line_item.cart_id)
-<<<<<<< HEAD
     
-=======
-    @product = @line_item.product
-    @prerepertory = @line_item.pre_repertory
-
->>>>>>> origin/dev3
     respond_to do |format|
       
       if ((1..10) === params[:line_item]["quantity"].to_i) == false
@@ -122,17 +89,8 @@ class LineItemsController < ApplicationController
         
       elsif @line_item.quantity == params[:line_item]["quantity"].to_i
         format.html { redirect_to edit_cart_path(@cart), notice: 'No change.' }
-<<<<<<< HEAD
         
       elsif @line_item.update_attributes(params[:line_item])
-=======
-      
-      elsif @prerepertory < params[:line_item]["quantity"].to_i
-        format.html { redirect_to edit_cart_path(@cart), notice: 'Repertory not enough.' }  
-      elsif @line_item.update_attributes(params[:line_item])
-        @product.temprepertory = @prerepertory - @line_item.quantity
-        @product.save
->>>>>>> origin/dev3
         @cart = current_cart
         format.html { redirect_to edit_cart_path(@cart), notice: 'Successfully updated.' }
       else
@@ -145,30 +103,12 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
-<<<<<<< HEAD
     @line_item = LineItem.find(params[:id])
     @cart = Cart.find(@line_item.cart_id)    
     @line_item.destroy
     
     respond_to do |format|
       format.html { redirect_to edit_cart_path(@cart), notice: 'Remove line_item successfully.' }
-=======
-    if session[:user_id] != nil 
-      if User.find(session[:user_id]).identity == "administrator" or session[:user_id] == LineItem.find(params[:id]).order.user_id
-        @line_item = LineItem.find(params[:id])
-        @cart = Cart.find(@line_item.cart_id)
-        @line_item.clear_the_item    
-        @line_item.destroy
-        
-        respond_to do |format|
-          format.html { redirect_to edit_cart_path(@cart), notice: 'Remove line_item successfully.' }
-        end
-      else
-        redirect_to store_path
-      end
-    else
-      redirect_to store_path
->>>>>>> origin/dev3
     end
   end
 

@@ -112,7 +112,6 @@ class CartsController < ApplicationController
       
       respond_to do |format|
         format.html { redirect_to carts_path, notice: "Attempt to access other's cart, failure" }
-<<<<<<< HEAD
       end
       
     else
@@ -126,21 +125,6 @@ class CartsController < ApplicationController
         end
       end
       
-=======
-      end
-      
-    else
-      respond_to do |format|
-        if @cart.update_attributes(params[:cart])
-          format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
-          format.json { head :no_content }
-        else
-          format.html { render action: "edit" }
-          format.json { render json: @cart.errors, status: :unprocessable_entity }
-        end
-      end
-      
->>>>>>> origin/dev3
     end
   end
 
@@ -150,11 +134,6 @@ class CartsController < ApplicationController
     user = User.find(session[:user_id])
     @cart = Cart.find(params[:id])
     
-<<<<<<< HEAD
-=======
-    @cart.clear_up
-    
->>>>>>> origin/dev3
     respond_to do |format|
       if user.identity == "administrator" or @cart.user_id == Integer(session[:user_id])
         @cart.destroy
@@ -171,13 +150,7 @@ class CartsController < ApplicationController
   def empty
     user = User.find(session[:user_id])
     @cart = Cart.find(params[:id])
-<<<<<<< HEAD
     
-=======
-
-    @cart.clear_up
-
->>>>>>> origin/dev3
     respond_to do |format|
       if @cart.user_id == Integer(session[:user_id])
         @cart.destroy

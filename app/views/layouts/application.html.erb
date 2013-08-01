@@ -40,7 +40,6 @@
 		<% end %>    
 		
 		<ul>
-<<<<<<< HEAD
 			<li> <a href=/><%= image_tag("house.png")%><%= t('.home') %></a> </li>
 			<li> <a href="http://www.baidu.com"><%= image_tag("question.jpg")%><%= t('.questions') %></a> </li>
 			<li> <a href="http://www.baidu.com"><%= image_tag("cal.png")%><%= t('.news') %></a> </li>
@@ -74,44 +73,6 @@
 		  	</br/>
 		  </font>
 
-=======
-			<li> <a href=/><%= t('.home') %></a> </li>
-			<li> <a href="http://www.baidu.com"><%= t('.questions') %></a> </li>
-			<li> <a href="http://www.baidu.com"><%= t('.news') %></a> </li>
-			<li> <a href="http://www.baidu.com"><%= t('.contact') %></a> </li>
-		</ul>
-		
-		<div>
-			<ul>
-				<% for item in Product::PRODUCT_CATEGORY %>
-					<li><%= link_to( t(".#{item}"), {:controller =>'store',:action => 'index',:catagory => item} ) %></li>
-				<% end %>
-			</ul>	
-		</div>
-				
-		<% if session[:user_id] %>
-		  <% if User.find_by_id(session[:user_id]).identity != "customer" %>
-		  <ul>
-		  	<li><%= link_to t('.orders'),   orders_path   %></li>
-		  	<li><%= link_to t('.products'), products_path %></li>
-		  	<% if User.find_by_id(session[:user_id]).identity == "administrator" %>
-		  		<li><%= link_to t('.users'),    users_path    %></li>
-		  	<% end %>
-		  </ul>
-		  <% end %>
-		  <font color=white size=3>
-		  	<%= t(".#{User.find_by_id(session[:user_id]).identity}") %> :
-		  	<br/>
-		  	<%= User.find_by_id(session[:user_id]).name %>
-		  	<br/>
-		  	<% if session[:user_id] != nil and User.find(session[:user_id]).identity == "customer" %>
-		  		<%= link_to t('.orders'),   orders_path   %><br/>
-			  	<%= link_to 'My Carts', carts_path %>
-			  	</br/>
-		  	<% end %>
-		  </font>
-
->>>>>>> origin/dev3
 		  <%= button_to t('.edit'), edit_user_path(id: session[:user_id]), method: :get %>
 		  <%= button_to t('.logout'), logout_path, method: :delete %>  
 

@@ -36,7 +36,6 @@
       </br>
     </div>
     
-<<<<<<< HEAD
     <div>
       <br>
       <%= f.label :email, 'Email' %>
@@ -44,9 +43,6 @@
       </br>
     </div>
     
-=======
-    <% if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity == "administrator" %>
->>>>>>> origin/dev3
     <div>
       <br>
       <%= f.label :identity, 'Identity' %>
@@ -54,10 +50,6 @@
             prompt: "Select an identity" %>
       </br>
     </div>
-<<<<<<< HEAD
-=======
-    <% end %>
->>>>>>> origin/dev3
 
     <div>
       <%= f.submit %>

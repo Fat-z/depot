@@ -17,11 +17,7 @@ class LineItemsControllerTest < ActionController::TestCase
 
   test "should get new" do
     get :new
-    if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity != "administrator"
-      assert_redirected_to store_url
-    else
-      assert_response :success
-    end
+    assert_response :success
   end
 
   test "should create line_item" do
@@ -33,24 +29,12 @@ class LineItemsControllerTest < ActionController::TestCase
 
   test "should show line_item" do
     get :show, id: @line_item
-    if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity != "administrator"
-      assert_redirected_to store_path
-    else
-      assert_response :success
-    end
+    assert_response :success
   end
 
   test "should get edit" do
     get :edit, id: @line_item
-    if session[:user_id] != nil 
-      if User.find(session[:user_id]).identity == "administrator" or session[:user_id] == @line_item.order.user_id 
-        assert_response :success
-      else
-        assert_redirected_to store_url
-      end
-    else
-      assert_redirected_to store_url
-    end
+    assert_response :success
   end
 
   test "should update line_item" do
@@ -59,7 +43,6 @@ class LineItemsControllerTest < ActionController::TestCase
     #assert_redirected_to line_item_path(assigns(:line_item))
   end
 
-<<<<<<< HEAD
   test "should destroy line_item" do
     assert_difference('LineItem.count', -1) do
       delete :destroy, id: @line_item
@@ -68,16 +51,6 @@ class LineItemsControllerTest < ActionController::TestCase
     assert_redirected_to edit_cart_path(assigns(:cart))
     #assert_redirected_to line_items_path
   end
-=======
-#  test "should destroy line_item" do
-    #assert_difference('LineItem.count', -1) do
- #     delete :destroy, id: @line_item, user_id: @user.id
-    #end
-  
-  #      assert_redirected_to edit_cart_path(assigns(:cart))
-   #assert_redirected_to line_items_path
-  #end
->>>>>>> origin/dev3
 
   test "should create line_item via ajax" do
     assert_difference('LineItem.count') do

@@ -58,14 +58,8 @@ class ProductsController < ApplicationController
     if session[:user_id] != nil
       @product.publish = User.find_by_id(session[:user_id]).name
     end
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/dev3
     respond_to do |format|
       if @product.save
-        @product.temprepertory = @product.repertory
-        @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
@@ -82,8 +76,6 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        @product.temprepertory = @product.repertory
-        @product.save
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { head :no_content }
       else

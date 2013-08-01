@@ -10,7 +10,6 @@
 <% @products.each do |product| %>
 
   <div class="entry">
-<<<<<<< HEAD
   	
     <%= link_to(image_tag(product.image_url),product_path(id: product.id), method: :get )%>
     
@@ -20,30 +19,18 @@
     	</span>
     	</a></h3>
     
-=======
-    <%= link_to(image_tag(product.image_url),product_path(id: product.id), method: :get )%>
-    <h3><%= link_to(product.title, product_path(id: product.id), method: :get )%></h3>
->>>>>>> origin/dev3
     <p><%= strip_tags(product.description) %></p>
     <div class="price_line">
 
       	<span class="price"><%= number_to_currency(product.price) %> 
-<<<<<<< HEAD
         &nbsp;&nbsp;<%= t('.repertory') %>:<%= product.repertory %> 
-=======
-        &nbsp;&nbsp;<%= t('.repertory') %>:<%= product.temprepertory %>  
->>>>>>> origin/dev3
         </span>
 
 		<% if session[:user_id] != nil %>
 		
 		    <% if User.find_by_id(session[:user_id]).identity == "customer" %>
 		    
-<<<<<<< HEAD
 		      <% if product.repertory > 0 %>  
-=======
-		      <% if product.temprepertory > 0 %>  
->>>>>>> origin/dev3
 		  		  <%= button_to t('.add_html'), line_items_path(:product_id => product, :cart_id => @cart.id),
 		  			   remote: true %>
 		      <% else %>
@@ -65,12 +52,6 @@
 <% end %>
 
 <%= will_paginate @products %>
-<% if session[:user_id] != nil and User.find_by_id(session[:user_id]).identity != "customer" %>
-  <div class="button_publish">
-  <%= button_to t('.publish'), new_product_path, method: :get %>
-  </div>
-<% end %>
-
 <% if session[:user_id] != nil and User.find_by_id(session[:user_id]).identity != "customer" %>
   <div class="button_publish">
   <%= button_to t('.publish'), new_product_path, method: :get %>
