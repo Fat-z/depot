@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20130731181057) do
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.string   "identity",        :default => "customer"
+    t.string   "email"
   end
 
 end

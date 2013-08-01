@@ -28,6 +28,17 @@
 		<%= form_tag store_path do %>
 			<div class = "field">
 				<%= text_field_tag 'search'%>
+				
+				<%= radio_button_tag(:about, "Book", true)%>
+				<%= label_tag(:search_book, "Book")%>
+
+				<%= radio_button_tag(:about, "Customer")%>
+				<%= label_tag(:search_user, "Customer")%>
+				
+				<%= radio_button_tag(:about, "Seller")%>
+				<%= label_tag(:search_seller, "Seller")%>
+				
+				<br />				
 				<%= submit_tag t('.search') %>
 				<br />
 			</div>

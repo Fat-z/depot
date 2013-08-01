@@ -7,6 +7,22 @@
 
 <h1><%= t('.title_html')%></h1>
 
+<%= form_tag( :action => "index", :catagory => @catag, :search => @search, :about => @about) do |f| %>
+	<%= label_tag("Order by") %>
+	
+	<%= radio_button_tag(:order, "title", true)%>
+	<%= label_tag(:order_title, "Title")%>
+	
+	<%= radio_button_tag(:order, "publish")%>
+	<%= label_tag(:order_publish, "Publisher")%>
+	
+	<%= radio_button_tag(:order, "price")%>
+	<%= label_tag(:order_price, "Price")%>
+	
+	<%= submit_tag 'submit'%>
+	
+<% end %>
+
 <% @products.each do |product| %>
 
   <div class="entry">

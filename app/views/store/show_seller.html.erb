@@ -1,0 +1,21 @@
+<h1><%= user.name %> is a seller </h1>
+
+<h2>His/Her products</h2>
+
+<% if products.length != 0%>
+	<% products.each do |product| %>
+	
+	    <%= image_tag(product.image_url, class: 'list_image') %>
+		<ul>
+	      <li>title: <%= product.title %></li>
+	      <li>description: <%= truncate(strip_tags(product.description),
+	            length: 80) %></li>
+	  	</ul>
+	      
+	<% end %>
+	
+<% else %>
+	<h3>No products created by the seller you search for</h3>
+<% end %>
+
+<%= link_to 'Back', store_path %>

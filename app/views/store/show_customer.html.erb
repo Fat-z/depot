@@ -1,0 +1,20 @@
+<h1><%= user.name %> is a customer </h1>
+
+<h2>His/Her comments</h2>
+
+<% if comments.length != 0%>
+	<% comments.each do |comment| %>
+		<% product = Product.find(comment.product_id) %>
+		<ul>
+	      <li>title: <%= product.title %></li>
+	      <li>comment_content: <%= truncate(strip_tags(comment.comment_content),
+	            length: 80) %></li>
+	  	</ul>
+	      
+	<% end %>
+	
+<% else %>
+	<h3>No comments created by the customer you search for</h3>
+<% end %>
+
+<%= link_to 'Back', store_path %>

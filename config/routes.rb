@@ -26,6 +26,11 @@ Depot::Application.routes.draw do
   
   scope '(:locale)' do
     
+    controller :store do
+      get 'index' => :index
+      post 'index' => :index
+    end
+        
     resources :users
 
     resources :orders
