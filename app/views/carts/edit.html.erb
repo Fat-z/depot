@@ -14,8 +14,8 @@
 		    <th>Name</th>
 		    <th>Price</th>
 		    <th>Category</th>
-		    <th>Update</th>
-		    <th>Remove</th>
+		    <th></th>
+		    <th></th>
 	  	</tr>
 	  	
 		<% @cart.line_items.each do |line_item|%>
@@ -40,6 +40,7 @@
 				
 	</table>
 	
+	<h3><%= link_to 'Checkout', add_order_path(:cart_id => @cart.id) %></h3>	
 <% end %>
 
-<%= link_to 'Back', store_path %>
+<%= link_to 'Back', carts_path %>

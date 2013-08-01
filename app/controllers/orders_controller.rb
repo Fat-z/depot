@@ -50,12 +50,50 @@ class OrdersController < ApplicationController
       end      
     end
   end
-
+  
+  def add
+    user = User.find(session[:user_id])
+    @cart = Cart.find(params[:cart_id])
+   
+   if user.id != @cart.user_id
+     redirect_to edit_cart_path(@cart), notice: "Attempt to checkout other's carts, failed !!"
+     
+   elsif @cart.line_items.empty?
+      redirect_to edit_cart_path(@cart), notice: "Your cart is empty"
+      
+   else
+      @order = Order.new
+  
+      respond_to do |format|
+        format.html 
+        format.json { render json: @order }
+      end      
+   end
+  end
+  
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
   end
 
+  def make
+    @order = Order.new(params[:order])
+    @cart = Cart.find(params[:cart_id])
+    @order.add_line_items_from_cart(@cart)
+    
+    respond_to do |format|
+      if @order.save
+        Cart.destroy(@cart.id)
+        OrderNotifier.received(@order).deliver
+        format.html { redirect_to carts_path, notice:
+           I18n.t('.thanks') }
+      else
+        format.html { render action: "add" }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+    end
+    
+  end
   # POST /orders
   # POST /orders.json
   def create

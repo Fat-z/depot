@@ -15,6 +15,7 @@
 	    <th></th>
 	    <th></th>
 	    <th></th>
+	    <th></th>
 	  </tr>
 	
 	<% @carts.each do |cart| %>
@@ -24,6 +25,7 @@
 	    <td><%= link_to 'Show', cart %></td>
 	    <td><%= link_to 'Edit', edit_cart_path(cart) %></td>
 	    <td><%= link_to 'Destroy', cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	    <td><%= link_to 'Merge_To_Current', merge_cart_path(cart) %></td>
 	  </tr>
 	<% end %>
 	</table>

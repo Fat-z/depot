@@ -8,13 +8,9 @@ Depot::Application.routes.draw do
 
   resources :comments
 
-
   resources :comment_line_items
 
-
   get 'admin' => 'admin#index'
-  
-  
   
   controller :sessions do
     get  'login' => :new
@@ -34,7 +30,11 @@ Depot::Application.routes.draw do
 
     resources :orders
   
-  
+    resources :orders do
+      get :add, on: :member
+      post :make, on: :member
+    end
+    
     resources :line_items
   
   
@@ -42,12 +42,12 @@ Depot::Application.routes.draw do
     
     resources :carts do
       get :empty, on: :member
+      get :merge, on: :member
     end  
     
     resources :sending do 
       get :stockout, on: :member
-      get :sendout, on: :member
-      
+      get :sendout, on: :member 
     end
   
     get "store/index"

@@ -61,7 +61,15 @@ ja:
       pay_type:         "支払い方式"
       pay_prompt_html:  "選択の支払い方法"
       submit:             "すぐお支払い"
-      
+
+    add:
+      legend:           "詳細を入力してください"
+      name:             "名前"
+      address_html:     "アドレス"
+      email:            "電子メール"
+      pay_type:         "支払い方式"
+      pay_prompt_html:  "選択の支払い方法"
+      submit:             "すぐお支払い"      
       
   activerecord:
     models:

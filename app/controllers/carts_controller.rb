@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
-  skip_before_filter :authorize,only: [:create, :update, :destroy]
+  #skip_before_filter :authorize,only: [:create, :update, :destroy]
+  skip_before_filter :authorize
   
   # GET /carts
   # GET /carts.json
@@ -111,7 +112,7 @@ class CartsController < ApplicationController
     if @cart.user_id != session[:user_id]
       
       respond_to do |format|
-        format.html { redirect_to carts_path, notice: "Attempt to access other's cart, failure" }
+        format.html { redirect_to carts_path, notice: "Attempt to update other's cart, failure" }
       end
       
     else
@@ -162,5 +163,30 @@ class CartsController < ApplicationController
       end
      end    
   end
-       
+  
+  def merge
+    if User.find(session[:user_id]).identity != "customer"
+      redirect_to carts_path, notice: "Attempt to merge a cart, failed: you are not a cunstomer!"
+      
+    else
+      @cart = current_cart
+      @cart_merge = Cart.find(params[:id])
+            
+      respond_to do |format|
+        if @cart.user_id != Integer(session[:user_id])
+          format.html { redirect_to carts_path, notice: "Attempt to merge a cart, failed: you are not the owner!" }
+        
+        elsif @cart.id == @cart_merge.id
+          format.html { redirect_to carts_path, notice: "It is the current cart, merge failed!" }
+        
+        else
+          @cart.merge_carts(@cart_merge)
+          @cart_merge.destroy
+          format.html { redirect_to carts_path, notice: "Merge to current cart successfully" }
+        end
+      end      
+    end
+    
+  end       
+  
 end
