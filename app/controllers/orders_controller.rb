@@ -4,27 +4,39 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.paginate page: params[:page], order: 'created_at desc',
-      per_page: 10
-      
-    @line_items = LineItem.paginate page: params[:page], order: 'created_at desc',
-      per_page: 10
+    if session[:user_id] != nil
+      @orders = Order.paginate page: params[:page], order: 'created_at desc',
+        per_page: 10
+        
+      @line_items = LineItem.paginate page: params[:page], order: 'created_at desc',
+        per_page: 10
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @orders }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @orders }
+      end
+    else
+      redirect_to store_url
     end
   end
 
   # GET /orders/1
   # GET /orders/1.json
   def show
-    @order = Order.find(params[:id])
-    @orders_all = Order.all
+    if session[:user_id] != nil
+      if User.find(session[:user_id]).identity == "administrator" or session[:user_id] == Order.find(params[:id]).user_id
+        @order = Order.find(params[:id])
+        @orders_all = Order.all
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @order }
+        respond_to do |format|
+          format.html # show.html.erb
+          format.json { render json: @order }
+        end
+      else
+        redirect_to store_url
+      end
+    else
+      redirect_to store_url
     end
   end
 
@@ -43,7 +55,6 @@ class OrdersController < ApplicationController
       
     else
       @order = Order.new
-  
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @order }
@@ -53,7 +64,15 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
-    @order = Order.find(params[:id])
+    if session[:user_id] != nil
+      if User.find(session[:user_id]).identity == "administrator" or session[:user_id] == Order.find(params[:id]).user_id
+        @order = Order.find(params[:id])
+      else
+        redirect_to store_url
+      end
+    else
+      redirect_to store_url
+    end
   end
 
   # POST /orders
@@ -64,6 +83,8 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
+         @order.user_id = session[:user_id]
+         @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
         OrderNotifier.received(@order).deliver
@@ -98,12 +119,22 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   # DELETE /orders/1.json
   def destroy
-    @order = Order.find(params[:id])
-    @order.destroy
+    if session[:user_id] != nil
+      if User.find(session[:user_id]).identity == "administrator" or session[:user_id] == Order.find(params[:id]).user_id
+        @order = Order.find(params[:id])
+        @order.after_destroying_the_order
+        @order.destroy
 
-    respond_to do |format|
-      format.html { redirect_to orders_url }
-      format.json { head :no_content }
+        respond_to do |format|
+          format.html { redirect_to orders_url }
+          format.json { head :no_content }
+        end
+      else
+        redirect_to store_url
+      end
+    else
+      redirect_to store_url
     end
   end
+
 end

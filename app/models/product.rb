@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  has_many :line_items
+  has_many :line_items, dependent: :destroy
   has_many :comment_line_items, dependent: :destroy
   has_many :orders, through: :line_items
   
@@ -8,7 +8,7 @@ class Product < ActiveRecord::Base
   #...
 
 
-  attr_accessible :description, :image_url, :price, :title, :publish, :repertory, :category
+  attr_accessible :description, :image_url, :price, :title, :publish, :repertory, :category, :temprepertory
   attr :comment_number, true
   
   PRODUCT_CATEGORY = ["literature", "science", "life", "culture", "economic"]

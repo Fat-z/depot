@@ -142,6 +142,8 @@ Product.create(title: 'Business Model Generation',
   image_url: 'business.jpg',
   category: 'economic',
   price: 177.00,
+  repertory: 10,
+  temprepertory: 10,
   publish: 'lc')
 
 Product.create(title: 'PHR and SPHR',

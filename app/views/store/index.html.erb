@@ -10,27 +10,24 @@
 <% @products.each do |product| %>
 
   <div class="entry">
-  	
     <%= link_to(image_tag(product.image_url),product_path(id: product.id), method: :get )%>
-    
     <h3><a href="<%= product_path(id: product.id) %>">
     	<span onmousemove="this.style.color='red';" onmouseout="this.style.color='blue'">
     		<%= product.title %>
     	</span>
     	</a></h3>
-    
     <p><%= strip_tags(product.description) %></p>
     <div class="price_line">
 
       	<span class="price"><%= number_to_currency(product.price) %> 
-        &nbsp;&nbsp;<%= t('.repertory') %>:<%= product.repertory %> 
+        &nbsp;&nbsp;<%= t('.repertory') %>:<%= product.temprepertory %>  
         </span>
 
 		<% if session[:user_id] != nil %>
 		
 		    <% if User.find_by_id(session[:user_id]).identity == "customer" %>
 		    
-		      <% if product.repertory > 0 %>  
+		      <% if product.temprepertory > 0 %>  
 		  		  <%= button_to t('.add_html'), line_items_path(:product_id => product, :cart_id => @cart.id),
 		  			   remote: true %>
 		      <% else %>
@@ -48,10 +45,8 @@
 
     </div>
   </div>
-
 <% end %>
 
-<%= will_paginate @products %>
 <% if session[:user_id] != nil and User.find_by_id(session[:user_id]).identity != "customer" %>
   <div class="button_publish">
   <%= button_to t('.publish'), new_product_path, method: :get %>

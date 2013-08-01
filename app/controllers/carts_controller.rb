@@ -134,6 +134,8 @@ class CartsController < ApplicationController
     user = User.find(session[:user_id])
     @cart = Cart.find(params[:id])
     
+    @cart.clear_up
+    
     respond_to do |format|
       if user.identity == "administrator" or @cart.user_id == Integer(session[:user_id])
         @cart.destroy
@@ -150,7 +152,9 @@ class CartsController < ApplicationController
   def empty
     user = User.find(session[:user_id])
     @cart = Cart.find(params[:id])
-    
+
+    @cart.clear_up
+
     respond_to do |format|
       if @cart.user_id == Integer(session[:user_id])
         @cart.destroy

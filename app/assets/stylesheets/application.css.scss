@@ -80,7 +80,7 @@
       padding: 0;
       li {
         list-style: none;
-        a {
+       a {
           color: #bfb;
           font-size: small;
           text-decoration: none;
@@ -88,8 +88,7 @@
         a:hover{ 
           color: yellow;
           background-color: #141;
-        }   
-         
+        }  
       }
     }
   }
@@ -133,7 +132,3 @@
   float: right;
   margin: -0.25em 0.1em;
 }
-
-.page_link{
-    margin-left: 30%;
-  }
