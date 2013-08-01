@@ -1,16 +1,42 @@
 <h1><%= user.name %> is a customer </h1>
 
-<h2>His/Her comments</h2>
+<h2>Comments built by <%= user.name %></h2>
+<br />
 
+<% count = 0 %>
 <% if comments.length != 0%>
 	<% comments.each do |comment| %>
 		<% product = Product.find(comment.product_id) %>
-		<ul>
-	      <li>title: <%= product.title %></li>
-	      <li>comment_content: <%= truncate(strip_tags(comment.comment_content),
-	            length: 80) %></li>
-	  	</ul>
-	      
+		
+		<h3>Comment <%= (count = count + 1) %></h3>
+		<table>
+			<tr>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr>
+				<td>Title</td>
+				<td><%= product.title %></td>
+			</tr>
+			
+			<tr>
+				<td>Publisher</td>
+				<td><%= product.publish %></td>
+			</tr>
+
+			<tr>
+				<td>Content</td>
+				<td><%= comment.comment_content %></td>
+			</tr>
+
+			<tr>
+				<td>Create_time</td>
+				<td><%= comment.created_at %></td>
+			</tr>
+			
+	    </table>
+	    <br /><br />
+	    
 	<% end %>
 	
 <% else %>

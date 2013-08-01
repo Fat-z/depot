@@ -1,17 +1,44 @@
 <h1><%= user.name %> is a seller </h1>
 
-<h2>His/Her products</h2>
+<h2>Most popular products of <%= user.name %></h2>
+<br />
 
 <% if products.length != 0%>
+	<% count = 0 %>
 	<% products.each do |product| %>
-	
-	    <%= image_tag(product.image_url, class: 'list_image') %>
-		<ul>
-	      <li>title: <%= product.title %></li>
-	      <li>description: <%= truncate(strip_tags(product.description),
-	            length: 80) %></li>
-	  	</ul>
-	      
+		
+		<h2>No. <%= (count = count + 1) %></h2>
+		
+		<table>
+			<%= image_tag(product["image_url"], class: 'list_image') %>
+			
+			<tr>
+				<th></th>
+				<th></th>
+			</tr>
+			
+			<tr>
+				<td>Total Comments: </td>
+				<td><%= product["comments_count"]%></td>
+			</tr>	
+			
+			<tr>
+				<td>Title: </td>
+				<td><%= product["title"]%></td>
+			</tr>
+			
+			<tr>
+				<td>Description: </td>
+				<td><%= truncate(strip_tags(product["description"]), length: 80) %></td>
+			</tr>
+			
+			<tr>
+				<td>Price: </td>
+				<td><%= product["price"]%></td>
+			</tr>
+		</table>
+		  	
+	    <br /><br />
 	<% end %>
 	
 <% else %>

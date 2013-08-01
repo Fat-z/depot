@@ -57,8 +57,25 @@ class StoreController < ApplicationController
           end
          
         else
+           result = []
            products = Product.where("publish = ?", user.name )
-           render "show_seller", :locals =>{:user => user, :products=> products}
+           
+           products.each do |pro|
+             item = {"image_url" => pro.image_url, 
+                  "description" => pro.description,
+                  "title" => pro.title,
+                  "price" => pro.price,
+                  "comments_count" => CommentLineItem.where("product_id = ?", pro.id ).count
+               }
+             result.push(item)
+           end
+           
+           if result.length > 0
+             result.sort! { |k, v| v["comments_count"]}
+             #result = result.reverse
+           end
+           
+           render "show_seller", :locals =>{:user => user, :products=> result}
         end
                 
       when "Customer"
@@ -81,5 +98,14 @@ class StoreController < ApplicationController
       end   
     end   
   end
+  
+  
+  def show_customer
     
+  end
+
+  def show_seller
+    
+  end
+        
 end
