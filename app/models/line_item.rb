@@ -3,7 +3,7 @@ class LineItem < ActiveRecord::Base
   belongs_to :order
   belongs_to :cart 
   attr_accessible :cart_id, :product_id, :quantity
-  attr_accessible :product
+  attr_accessible :product, :order
 
   def total_price
   	product.price * quantity
@@ -22,5 +22,15 @@ class LineItem < ActiveRecord::Base
   def count_user_orders
   	
   end
+
+  def clear_the_item
+    product.temprepertory += quantity
+    product.save
+  end
+
+  def pre_repertory
+    quantity + product.temprepertory
+  end
+  
 
 end

@@ -36,6 +36,7 @@
       </br>
     </div>
     
+    <% if session[:user_id] == nil or User.find_by_id(session[:user_id]).identity == "administrator" %>
     <div>
       <br>
       <%= f.label :identity, 'Identity' %>
@@ -43,6 +44,7 @@
             prompt: "Select an identity" %>
       </br>
     </div>
+    <% end %>
 
     <div>
       <%= f.submit %>

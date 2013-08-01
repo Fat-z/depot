@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many  :carts, dependent:  :destroy
+  has_many  :orders, dependent: :destroy
   
   IDENTITY_TYPES = ["customer", "seller"]
   ALL_IDENTITY_TYPES = ["customer", "seller", "administrator"]

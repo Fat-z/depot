@@ -40,10 +40,10 @@
 		<% end %>    
 		
 		<ul>
-			<li> <a href=/><%= t('.home') %></a> </li>
-			<li> <a href="http://www.baidu.com"><%= t('.questions') %></a> </li>
-			<li> <a href="http://www.baidu.com"><%= t('.news') %></a> </li>
-			<li> <a href="http://www.baidu.com"><%= t('.contact') %></a> </li>
+			<li> <a href=/><%= image_tag("house.png")%><%= t('.home') %></a> </li>
+			<li> <a href="http://www.baidu.com"><%= image_tag("question.jpg")%><%= t('.questions') %></a> </li>
+			<li> <a href="http://www.baidu.com"><%= image_tag("cal.png")%><%= t('.news') %></a> </li>
+			<li> <a href="http://www.baidu.com"><%= image_tag("contact.jpg")%><%= t('.contact') %></a> </li>
 		</ul>
 		
 		<div>
@@ -69,8 +69,11 @@
 		  	<br/>
 		  	<%= User.find_by_id(session[:user_id]).name %>
 		  	<br/>
-		  	<%= link_to 'My Carts', carts_path %>
-		  	</br/>
+		  	<% if session[:user_id] != nil and User.find(session[:user_id]).identity == "customer" %>
+		  		<%= link_to t('.orders'),   orders_path   %><br/>
+			  	<%= link_to 'My Carts', carts_path %>
+			  	</br/>
+		  	<% end %>
 		  </font>
 
 		  <%= button_to t('.edit'), edit_user_path(id: session[:user_id]), method: :get %>
