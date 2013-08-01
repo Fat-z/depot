@@ -1,9 +1,17 @@
 class User < ActiveRecord::Base
   has_many  :carts, dependent:  :destroy
+<<<<<<< HEAD
   
   IDENTITY_TYPES = ["customer", "seller"]
   ALL_IDENTITY_TYPES = ["customer", "seller", "administrator"]
   attr_accessible :name, :password_digest, :password, :password_confirmation, :identity, :email
+=======
+  has_many  :orders, dependent: :destroy
+  
+  IDENTITY_TYPES = ["customer", "seller"]
+  ALL_IDENTITY_TYPES = ["customer", "seller", "administrator"]
+  attr_accessible :name, :password_digest, :password, :password_confirmation, :identity
+>>>>>>> origin/dev3
   
   validates :identity, inclusion: ALL_IDENTITY_TYPES
   validates :name, presence: true, uniqueness: true

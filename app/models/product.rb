@@ -1,5 +1,9 @@
 class Product < ActiveRecord::Base
+<<<<<<< HEAD
   has_many :line_items
+=======
+  has_many :line_items, dependent: :destroy
+>>>>>>> origin/dev3
   has_many :comment_line_items, dependent: :destroy
   has_many :orders, through: :line_items
   
@@ -8,7 +12,11 @@ class Product < ActiveRecord::Base
   #...
 
 
+<<<<<<< HEAD
   attr_accessible :description, :image_url, :price, :title, :publish, :repertory, :category
+=======
+  attr_accessible :description, :image_url, :price, :title, :publish, :repertory, :category, :temprepertory
+>>>>>>> origin/dev3
   attr :comment_number, true
   
   PRODUCT_CATEGORY = ["literature", "science", "life", "culture", "economic"]

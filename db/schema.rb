@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130731122725) do
+=======
+ActiveRecord::Schema.define(:version => 20130731181057) do
+>>>>>>> origin/dev3
 
   create_table "carts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -50,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20130731122725) do
     t.string   "pay_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   create_table "products", :force => true do |t|
@@ -57,11 +62,20 @@ ActiveRecord::Schema.define(:version => 20130731122725) do
     t.text     "description"
     t.string   "image_url"
     t.decimal  "price"
+<<<<<<< HEAD
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
     t.string   "publish"
     t.integer  "repertory",   :default => 1
     t.string   "category"
+=======
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.string   "publish"
+    t.integer  "repertory",     :default => 1
+    t.string   "category"
+    t.integer  "temprepertory", :default => 1
+>>>>>>> origin/dev3
   end
 
   create_table "users", :force => true do |t|
@@ -70,7 +84,10 @@ ActiveRecord::Schema.define(:version => 20130731122725) do
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.string   "identity",        :default => "customer"
+<<<<<<< HEAD
     t.string   "email"
+=======
+>>>>>>> origin/dev3
   end
 
 end

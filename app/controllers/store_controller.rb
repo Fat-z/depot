@@ -13,9 +13,13 @@ class StoreController < ApplicationController
     end
   
     @cart = current_cart
+<<<<<<< HEAD
     
     @products = @products.paginate :page => params[:page], :per_page => 5
     
+=======
+
+>>>>>>> origin/dev3
     if params[:search] and params[:search].lstrip != ""
       #product = Product.where("title = ?", params[:search])
 

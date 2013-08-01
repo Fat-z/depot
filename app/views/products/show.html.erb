@@ -25,7 +25,11 @@
     
     <p>
     <b>Repertory:</b>
+<<<<<<< HEAD
     <%= @product.repertory %>
+=======
+    <%= @product.temprepertory %>
+>>>>>>> origin/dev3
     </p>   
    
     <% if session[:user_id] and (User.find_by_id(session[:user_id]).name == @product.publish or User.find_by_id(session[:user_id]).identity == 'administrator') %>
@@ -34,6 +38,7 @@
       <%= link_to 'Back', products_path %>
 
     <% end %>
+<<<<<<< HEAD
     <div>
     <% if session[:user_id] and(User.find_by_id(session[:user_id]).identity == "customer") %>
 		    
@@ -55,6 +60,29 @@
 	  <%= sanitize @product.description %>
 </div>
 
+=======
+    
+    <% if session[:user_id] != nil and User.find_by_id(session[:user_id]).identity == "customer" %>
+      <div>
+        <%if @product.temprepertory > 0 %>
+          <%= button_to "Add to Cart", line_items_path(:product_id => @product, :cart_id => @cart.id), remote: true%>
+        <% else %>
+          <font color="red", size="3">Sorry for the product's stockout!</font>
+        <% end %>
+      </div>	
+    <% end %>
+
+    <br><br />
+    <br><br />
+    <br><br />
+    <br><br />
+<div id="splite_line" style="border-top:1px dashed #cccccc; height: 1px; overflow:hidden"></div>
+<div>
+	<b>Description:</b>
+	  <%= sanitize @product.description %>
+</div>
+
+>>>>>>> origin/dev3
 <div style="border-top:1px dashed #cccccc; height: 1px; overflow:hidden"></div>
 
 
