@@ -96,7 +96,52 @@ class StoreController < ApplicationController
            format.html { redirect_to store_url, notice: "invalid params" }
          end        
       end   
-    end   
+    end
+    
+    if params[:order] == "popular" and @products.length != 0
+                    
+      popular = []
+      products = []
+      index = 0
+      
+      @products.each do |pro|
+        item = {"id" => pro.id,
+                "num" => CommentLineItem.where("product_id = ?", pro.id ).count }
+                               
+        count = index
+        while count > 0
+          if popular[count-1]["num"] >= item["num"]
+            break
+            
+          end       
+          count -= 1
+        end
+        
+        if count == 0
+          tmp = [item]
+          popular = tmp + popular
+          
+        elsif count == index
+          popular[count] = item
+          
+        else
+          popular = popular[0..count - 1] + tmp + popular[count..index - 1]
+          
+        end
+        index += 1
+       
+        #popular.push(item)
+      end
+      
+      #popular.sort! {|k, v| v["num"] }
+      
+      popular.each do |pop|
+        products.push( Product.find(pop["id"]) )
+      end
+      
+      @products = products
+    end
+       
   end
   
   
