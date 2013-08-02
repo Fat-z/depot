@@ -61,7 +61,8 @@ class StoreController < ApplicationController
            products = Product.where("publish = ?", user.name )
            
            products.each do |pro|
-             item = {"image_url" => pro.image_url, 
+             item = {"product_id" => pro.id,
+                  "image_url" => pro.image_url, 
                   "description" => pro.description,
                   "title" => pro.title,
                   "price" => pro.price,
@@ -117,16 +118,16 @@ class StoreController < ApplicationController
           count -= 1
         end
         
-        if count == 0
-          tmp = [item]
-          popular = tmp + popular
-          
-        elsif count == index
+        tmp = [item]
+        
+        if index == 0 or count == index
           popular[count] = item
           
+        elsif count == 0
+          popular = tmp + popular
+        
         else
-          popular = popular[0..count - 1] + tmp + popular[count..index - 1]
-          
+          popular = popular[0..count-1] + tmp + popular[count..index-1]
         end
         index += 1
        

@@ -30,6 +30,7 @@
 
   <div class="entry">
     <%= link_to(image_tag(product.image_url),product_path(id: product.id), method: :get )%>
+
     <h3><a href="<%= product_path(id: product.id) %>">
     	<span onmousemove="this.style.color='red';" onmouseout="this.style.color='blue'">
     		<%= product.title %>

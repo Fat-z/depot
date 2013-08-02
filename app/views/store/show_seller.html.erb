@@ -10,8 +10,8 @@
 		<h2>No. <%= (count = count + 1) %></h2>
 		
 		<table>
-			<%= image_tag(product["image_url"], class: 'list_image') %>
-			
+			<!--<%= image_tag(product["image_url"], class: 'list_image') %>-->
+    		<%= link_to(image_tag(product["image_url"]),product_path(id: product["product_id"]), method: :get )%>			
 			<tr>
 				<th></th>
 				<th></th>
@@ -24,7 +24,8 @@
 			
 			<tr>
 				<td>Title: </td>
-				<td><%= product["title"]%></td>
+				<td><a href="<%= product_path(id: product["product_id"]) %>"><%= product["title"]%></a></td>
+				<!--<td><%= product["title"]%></td>-->
 			</tr>
 			
 			<tr>

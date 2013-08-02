@@ -16,7 +16,8 @@
 			</tr>
 			<tr>
 				<td>Title</td>
-				<td><%= product.title %></td>
+				<td><a href="<%= product_path(id: product.id) %>"><%= product.title %></a></td>
+				<!--<td><%= product.title %></td>-->
 			</tr>
 			
 			<tr>
