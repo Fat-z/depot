@@ -12,6 +12,7 @@ LineItem.delete_all
 
 Product.delete_all
 User.delete_all
+Vision.delete_all
 
 User.create(name: 'admin',
   password: '123',
