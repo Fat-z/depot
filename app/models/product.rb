@@ -8,8 +8,12 @@ class Product < ActiveRecord::Base
   #...
 
 
-  attr_accessible :description, :image_url, :price, :title, :publish, :repertory, :category, :temprepertory
+  attr_accessible :description, :image_url, :price, :title, :publish, :repertory, :category, :temprepertory, :photo
   attr :comment_number, true
+  
+  has_attached_file :photo,
+                  :url => "/assets/products/:id/:basename.:extension",  
+                  :path => ":rails_root/public/assets/products/:id/:basename.:extension" 
   
   PRODUCT_CATEGORY = ["literature", "science", "life", "culture", "economic"]
   validates :category, inclusion: PRODUCT_CATEGORY
@@ -19,6 +23,11 @@ class Product < ActiveRecord::Base
   validates :repertory, numericality: {greater_than_or_equal_to: 0}
 # 
   validates :title, uniqueness: true
+  
+ # validates_attachment_presence :photo
+  validates_attachment_size :photo, :less_than => 5.megabytes
+  validates_attachment_content_type :photo, :content_type =>['image/jpeg','image/png','image/gif']
+
   validates :image_url, allow_blank: true, format: {
     with:    %r{\.(gif|jpg|png)\Z}i,
     message: 'must be a URL for GIF, JPG or PNG image.'

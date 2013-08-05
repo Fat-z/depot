@@ -2,7 +2,11 @@
 <p id="notice"><%= notice %></p>
 <% end %>
 
-	<p><%= image_tag(@product.image_url, class: 'img') %></p>
+	<% if @product.photo.exists? %>
+      <p><%= image_tag(@product.photo.url, class: 'img') %></p>
+    <% else %>
+      <p><%= image_tag(@product.image_url, class: 'img') %></p>
+    <% end %>
 
     <p>
     <b>Title:</b>

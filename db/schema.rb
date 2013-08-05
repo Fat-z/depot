@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130731181057) do
+ActiveRecord::Schema.define(:version => 20130805014618) do
 
   create_table "carts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -58,12 +58,16 @@ ActiveRecord::Schema.define(:version => 20130731181057) do
     t.text     "description"
     t.string   "image_url"
     t.decimal  "price"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "publish"
-    t.integer  "repertory",     :default => 1
+    t.integer  "repertory",          :default => 1
     t.string   "category"
-    t.integer  "temprepertory", :default => 1
+    t.integer  "temprepertory",      :default => 1
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "users", :force => true do |t|
