@@ -6,6 +6,7 @@ en:
     application:
       title:      "Pragmatic Bookshelf"
       home:       "Home"
+      vision:     "Vision"
       search:     "Search"
       orders:     "Orders"
       products:   "Products"
