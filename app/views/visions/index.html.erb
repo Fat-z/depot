@@ -1,0 +1,38 @@
+<h1>Listing visions</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Number</th>
+    <th>Email</th>
+    <th>Comment</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @visions.each do |vision| %>
+  <tr>
+    <td><%= vision.title %></td>
+    <td><%= vision.number %></td>
+    <td><%= vision.email %></td>
+    <td><%= vision.comment %></td>
+    <td><%= link_to 'Show', vision %></td>
+
+    <% if session[:user_id] != nil and User.find(session[:user_id]).identity == "seller" %>
+      <td><%= button_to "publish", dispose_vision_path(vision), method: :get %></td>
+    <% end %>
+
+    <% if session[:user_id] != nil and User.find(session[:user_id]).identity != "seller" %>
+      <td><%= link_to 'Edit', edit_vision_path(vision) %></td>
+      <td><%= link_to 'Destroy', vision, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if session[:user_id] != nil and User.find(session[:user_id]).identity != "seller" %>
+  <%= link_to 'New Vision', new_vision_path %>
+<% end %>

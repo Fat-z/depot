@@ -1,5 +1,7 @@
 Depot::Application.routes.draw do
 
+
+
   get "sending/index"
 
   get "sending/sendout" => 'sending#sendout'
@@ -30,7 +32,13 @@ Depot::Application.routes.draw do
       get 'index' => :index
       post 'index' => :index
     end
-        
+
+    resources :visions 
+
+    resources :visions do 
+      get :dispose, on: :member
+    end
+
     resources :users
 
     resources :orders

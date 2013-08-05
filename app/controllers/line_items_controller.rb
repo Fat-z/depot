@@ -131,14 +131,24 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1.json
   def destroy
     if session[:user_id] != nil 
-      if User.find(session[:user_id]).identity == "administrator" or session[:user_id] == LineItem.find(params[:id]).order.user_id
+      if User.find(session[:user_id]).identity == "administrator" or LineItem.find(params[:id]).order_id == nil or session[:user_id] == LineItem.find(params[:id]).order.user_id
         @line_item = LineItem.find(params[:id])
-        @cart = Cart.find(@line_item.cart_id)
+        
+        if @line_item.cart_id != nil
+          @cart = Cart.find(@line_item.cart_id)
+        else
+          @order = LineItem.find(params[:id]).order
+        end
+        
         @line_item.clear_the_item    
         @line_item.destroy
         
         respond_to do |format|
-          format.html { redirect_to edit_cart_path(@cart), notice: 'Remove line_item successfully.' }
+          if @line_item.cart_id != nil
+            format.html { redirect_to edit_cart_path(@cart), notice: 'Remove line_item successfully.' }
+          else
+            format.html { redirect_to show_order_path(@order), notice: 'Remove line_item successfully'}
+          end
         end
       else
         redirect_to store_path

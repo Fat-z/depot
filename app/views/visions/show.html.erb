@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @vision.title %>
+</p>
+
+<p>
+  <b>Number:</b>
+  <%= @vision.number %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @vision.email %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%= @vision.comment %>
+</p>
+
+<% if session[:user_id] != nil and User.find(session[:user_id]).identity != "seller" %>
+	<%= link_to 'Edit', edit_vision_path(@vision) %> |
+<% end %>
+
+<%= link_to 'Back', visions_path %>
