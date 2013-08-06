@@ -55,32 +55,21 @@
 }
   
 #notice {
+  font-size: 22px;
+  margin-left: 20px;
+  /*
   color: #000 !important;
   border: 2px solid red;
   padding: 1em;
   margin-bottom: 2em;
   background-color: #f0f0f0;
   font: bold smaller sans-serif;
+  */
 }
 
 #columns {
-  /*
-  background: #141;
-
-  #main {
-    margin-left: 17em;
-    padding: 1em;
-    background: white;
-  }
-  */
+  
   #side {
-    /*
-    float: left;
-    padding: 1em 2em;
-    width: 13em;
-    background: #141;
-    */
-   //background: #666666;
    width: 250px;
    
    select{
@@ -94,19 +83,18 @@
       }      
     }
     
- 
     #cart {
-    font-size: 20px;
-    font-weight: bold;
-    color: #000000;
-  
-      table {
-        border-top: 1px dotted #595;
-        border-bottom: 1px dotted #595;
-        margin-bottom: 10px;
+      color: #444444;
+      font-size: 24px;
+      font-weight: bold;
+      
+      /*
+      .cart_title, table  tr td{
+        background-color: #444444;
       }
+      */
     }
-
+    
     ul {
       padding: 0;
       li {
