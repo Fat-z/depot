@@ -11,15 +11,13 @@
 </table>
     
 <% if cart.user_id == session[:user_id] %>
-	<div class="btn-group" data-toggle="buttons-checkbox">
-		<%= button_to t('.checkout'), new_order_path, method: :get, class: 'btn btn-primary'%>
-		<!--<%= button_to t('.checkout'), {:controller => 'orders', :action => 'new', :id => cart.id}, method: :get %>-->
-		
-		<% if cart.line_items.length != 0 %>
-			<%= button_to t('.modify'), edit_cart_path(cart), method: :get, class: 'btn btn-primary' %>
-		<% end %>
-		
-		<%= button_to t('.empty'), empty_cart_path(cart), method: :get,class: 'btn btn-primary',
-			confirm: 'Are you sure?' %>
-	</div>		
+	<!--<div class="btn-group" data-toggle="buttons-checkbox">-->
+	<%= button_to t('.checkout'), new_order_path, method: :get, class: 'btn btn-primary'%>
+	
+	<% if cart.line_items.length != 0 %>
+		<%= button_to t('.modify'), edit_cart_path(cart), method: :get, class: 'btn btn-primary' %>
+	<% end %>
+	
+	<%= button_to t('.empty'), empty_cart_path(cart), method: :get,class: 'btn btn-primary',
+		confirm: 'Are you sure?' %>	
 <% end %>	

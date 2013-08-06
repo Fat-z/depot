@@ -4,12 +4,14 @@
   <title>Pragprog Books Online Store</title>
   <%= stylesheet_link_tag  "application" %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "jQuery"%>
   <%= csrf_meta_tag %>
+  
 </head>
 <body class="<%= controller.controller_name %>">
 	
-<div id = "banner" class="container-fluid">
-	<div class="row-fluid">
+<div id = "banner_span" class="container-fluid">
+	<div id = "banner" class="row-fluid">
 		
 		<div id = "logo" class="span2 offset2">
 			<%= image_tag("book.jpg") %>
@@ -56,7 +58,7 @@
 		
 		<div class="span12"></div>
 	</div>
-	
+		
 	<div id = "columns" class="row-fluid">
 		<div id = "side" class="span3 offset1">
 			
