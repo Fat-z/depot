@@ -3,7 +3,7 @@ class CreateProducts < ActiveRecord::Migration
     create_table :products do |t|
       t.string :title
       t.text :description
-      t.string :image_url
+      t.string :image_url, default: 'init.jpg'
       t.decimal :price
 
       t.timestamps
