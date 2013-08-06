@@ -58,5 +58,6 @@ class Product < ActiveRecord::Base
       self.photo.instance_write(:file_name, "#{Time.now.strftime("%Y%m%d%H%M%S")}#{rand(1000)}#{extension}")
       end
     end
+   
 
 end

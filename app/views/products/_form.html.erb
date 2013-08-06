@@ -21,9 +21,13 @@
   </div>
   <div class="field">
     <%= f.label :repertory %><br />
-    <%= f.text_field :repertory%>
+    <%= f.text_field :temprepertory%>
   </div>
-
+  
+  <div class="field" style="display: none">
+    <%= f.label :repertory %><br />
+    <%= f.text_field :repertory, :value =>@product.temprepertory%>
+  </div>
   
   <div class="field">
   	<%= f.label :photo %><br />

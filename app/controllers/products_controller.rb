@@ -61,9 +61,6 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        @product.temprepertory = @product.repertory
-        @product.photo = @product.photo      #here one more time save will lost the upload photo,so do this
-        @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
@@ -77,12 +74,10 @@ class ProductsController < ApplicationController
   # PUT /products/1.json
   def update
     @product = Product.find(params[:id])
-
+    @product.photo.destroy
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        @product.temprepertory = @product.repertory
-        @product.photo = Product.find(params[:id]).photo   #here save will lost the upload photo,so do this
-        @product.save
+       
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { head :no_content }
       else
