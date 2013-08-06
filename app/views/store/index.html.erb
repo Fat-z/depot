@@ -5,82 +5,120 @@
 <p id="notice"><%= notice %></p>
 <% end %>
 
-<h1><%= t('.title_html')%></h1>
-
-<%= form_tag( :action => "index", :catagory => @catag, :search => @search, :about => @about) do |f| %>
-	<%= label_tag("Order by") %>
-	<!--
-	<%= select_tag :order, 
-		options_for_select(["title", "publish", "price", "popular"]),
-		onchange: 'this.form.submit()' %>
-	<%= submit_tag 'submit', class: "order" %>
-	<%= javascript_tag "$('.order').hide()" %>
-	-->
-	
-	<%= radio_button_tag(:order, "title", true, click: "this.form.submit()")%>
-	<%= label_tag(:order_title, "Title") %>
-	
-	<%= radio_button_tag(:order, "publish", click: "this.form.submit()")%>
-	<%= label_tag(:order_publish, "Publisher")%>
-	
-	<%= radio_button_tag(:order, "price", click: "this.form.submit()" )%>
-	<%= label_tag(:order_price, "Price")%>
-
-	<%= radio_button_tag(:order, "popular", click: "this.form.submit()")%>
-	<%= label_tag(:order_popular, "Popular")%>
-	
-	<%= submit_tag 'submit', class: "order" %>
-	<%= javascript_tag "$('.order').hide()" %>
-	
-<% end %>
-
-<% @products.each do |product| %>
-
-  <div class="entry">
-    <% if product.photo.exists? %>
-    <%= link_to(image_tag(product.photo.url),product_path(id: product.id), method: :get ) %>
-    <% else %>
-    <%= link_to(image_tag(product.image_url),product_path(id: product.id), method: :get ) %>
-    <% end %>
-
-    <h3><a href="<%= product_path(id: product.id) %>">
-    	<span onmousemove="this.style.color='red';" onmouseout="this.style.color='blue'">
-    		<%= product.title %>
-    	</span>
-    	</a></h3>
-    <p><%= strip_tags(product.description) %></p>
-    <div class="price_line">
-
-      	<span class="price"><%= number_to_currency(product.price) %> 
-        &nbsp;&nbsp;<%= t('.repertory') %>:<%= product.temprepertory %>  
-        </span>
-
-		<% if session[:user_id] != nil %>
-		
-		    <% if User.find_by_id(session[:user_id]).identity == "customer" %>
-		    
-		      <% if product.temprepertory > 0 %>  
-		  		  <%= button_to t('.add_html'), line_items_path(:product_id => product, :cart_id => @cart.id),
-		  			   remote: true %>
-		      <% else %>
-		        <font color="red", size="3">Sorry for the product's stockout!</font>
-		      <% end %>
-		      
-		    <% elsif User.find_by_id(session[:user_id]).identity == "administrator" or 
-		    	session[:user_name] == product.publish %>
+<div id="myCarousel" class="carousel slide">
+    <ol class="carousel-indicators">
+	    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	    <li data-target="#myCarousel" data-slide-to="1"></li>
+	    <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+    	<% init = 1 %>
+    	<% if @products2 != nil %>
+		    <% @products2.each do |product| %>
+		    	<% if init == 1%>
+		    		<% init += 1 %>
+		    		<div class="active item">
+		    	<% else %>
+		    		<div class="item">
+		    	<% end %>
 		    	
-		        <%= button_to t('.edit'), edit_product_path(id: product), method: :get %>
-		        <%= button_to t('.delete'), product_path(id: product), method: :delete %>
-		    <% end %>
-		    
-	    <% end %>	
-
+		    	<div class="row-fluid">
+		    		<div class="span5 offset2">
+		    			<div class="carousel-content"><%= product.title%></div>
+		    			<div class="carousel-content"><%= number_to_currency(product.price) %></div>
+		    		</div>
+		    		
+		    		<div class="span5">
+					    <% if product.photo.exists? %>
+					    	<%= link_to(image_tag(product.photo.url, class: "img-circle"),product_path(id: product.id), method: :get ) %>
+					    <% else %>
+					    	<%= link_to(image_tag(product.image_url, class: "img-circle"),product_path(id: product.id), method: :get ) %>
+					    <% end %>		    			
+		    		</div>
+		    	</div></div>
+			    
+			<% end %>
+		<% else %>
+			<h3>Empty produts</h3>
+		<% end %>	
     </div>
-  </div>
-<% end %>
+ 
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    
+</div>
 
-<% if session[:user_id] != nil and User.find_by_id(session[:user_id]).identity != "customer" %>
-  <div class="button_publish">
-  <%= button_to t('.publish'), new_product_path, method: :get %>
-  </div>
-<% end %>
+<div class="row-fluid">
+	<div class="span12">
+		<%= form_tag( :action => "index", :catagory => @catag, :search => @search, :about => @about) do |f| %>
+			<div id = "order_by" class = "span2"><%= label_tag("Order by") %></div>
+			
+			<%= select_tag :order, 
+				options_for_select(["title", "publish", "price", "popular"]),
+				onchange: 'this.form.submit()' %>
+			<%= submit_tag 'submit', class: "order" %>
+			<%= javascript_tag "$('.order').hide()" %>
+
+		<% end %>		
+	</div>
+	
+	<div id = "entry" class="span12">
+		<ul class="thumbnails">
+			<% if @products != nil %>
+				<% @products.each do |product| %>
+				<li class="span4">
+					<div class="thumbnail">
+						    <% if product.photo.exists? %>
+						    	<%= link_to(image_tag(product.photo.url, class: 'img-rounded'),product_path(id: product.id), method: :get ) %>
+						    <% else %>
+						    	<%= link_to(image_tag(product.image_url, class: 'img-rounded'),product_path(id: product.id), method: :get ) %>
+						    <% end %>
+					    
+					    <div id = "entry_item">
+					      	<a href="<%= product_path(id: product.id) %>"> <%= product.title %></a><br />
+					    	
+						
+					      	<p><%= number_to_currency(product.price) %> 
+					        &nbsp;&nbsp;<%= t('.repertory') %>:<%= product.temprepertory %></p>
+							
+							<% if session[:user_id] != nil %>
+							
+							    <% if User.find_by_id(session[:user_id]).identity == "customer" %>
+							    
+							      <% if product.temprepertory > 0 %>  
+							  		  <%= button_to t('.add_html'), line_items_path(:product_id => product, :cart_id => @cart.id),
+							  			   remote: true , class: 'btn btn-danger btn-small'%>
+							      <% else %>
+							        <p><font color="red">Sorry for the product's stockout!</font></p>
+							      <% end %>
+							      
+							    <% elsif User.find_by_id(session[:user_id]).identity == "administrator" or 
+							    	session[:user_name] == product.publish %>
+							    	<%= button_to t('.edit'), edit_product_path(id: product), method: :get , class: 'btn btn-danger btn-small'%>
+							        <%= button_to t('.delete'), product_path(id: product), method: :delete , class: 'btn btn-danger btn-small'%>
+							    	
+							    <% end %>
+							    
+						    <% end %>	
+						    <p><%= truncate(strip_tags(product["description"]), length: 70) %></p>
+					    </div>		    	
+				    </div>
+				</li>>
+				<% end %>
+			<% else %>
+				<h3>Empty here!!</h3>
+			<% end %>	
+		</ul>
+		<div class="pagination span7 offset4">
+		    <ul>
+		    	<!--<li><%= link_to( "Pre", {:action => "index", :catagory => @catag, :search => @search, :about => @about, :page => "pre"} ) %></li>-->
+		    	<li><%= link_to( "1", {:action => "index", :catagory => @catag, :search => @search, :about => @about, :page => "1"} ) %></li>
+		    	<li><%= link_to( "2", {:action => "index", :catagory => @catag, :search => @search, :about => @about, :page => "2"} ) %></li>
+		    	<li><%= link_to( "3", {:action => "index", :catagory => @catag, :search => @search, :about => @about, :page => "3"} ) %></li>
+		    	<li><%= link_to( "4", {:action => "index", :catagory => @catag, :search => @search, :about => @about, :page => "4"} ) %></li>
+		    	<!--<li><%= link_to( "Next", {:action => "index", :catagory => @catag, :search => @search, :about => @about, :page => "next"} ) %></li>-->
+		    </ul>
+    	</div>
+	</div>	
+		
+</div>

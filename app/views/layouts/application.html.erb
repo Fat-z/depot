@@ -7,100 +7,120 @@
   <%= csrf_meta_tag %>
 </head>
 <body class="<%= controller.controller_name %>">
-
-<div id="banner">
 	
-	<%= form_tag store_path, class: 'locale' do %>
-		<%= select_tag 'set_locale',
-			options_for_select(LANGUAGES, I18n.locale.to_s),
-			onchange: 'this.form.submit()' %>
-		<%= submit_tag 'submit'%>
-		<%= javascript_tag "$('.locale input').hide()" %>
-	<% end %>
+<div id = "banner" class="container-fluid">
+	<div class="row-fluid">
 		
-	<%= image_tag("logo.png") %>
-	<%= @page_title || t('.title') %>
-	<!--<%= @page_title || "Pragmatic Bookshelf" %>-->
-</div>
-<div id="columns">
-	<div id="side">
-		
-		<%= form_tag store_path do %>
-			<div class = "field">
-				<%= text_field_tag 'search'%>
-				
-				<%= radio_button_tag(:about, "Book", true)%>
-				<%= label_tag(:search_book, "Book")%>
-
-				<%= radio_button_tag(:about, "Customer")%>
-				<%= label_tag(:search_user, "Customer")%>
-				
-				<%= radio_button_tag(:about, "Seller")%>
-				<%= label_tag(:search_seller, "Seller")%>
-				
-				<br />				
-				<%= submit_tag t('.search') %>
-				<br />
-			</div>
-		<% end %>
-		
-		<% if @cart %>
-     		<%= hidden_div_if(@cart.line_items.empty?, id:'cart') do%>
-	    		<%= render @cart %>
-		    <% end %>
-		<% end %>    
-		
-		<ul>
-			<li> <a href=/><%= image_tag("house.png")%><%= t('.home') %></a> </li>
-			<li> <a href="http://www.baidu.com"><%= image_tag("question.jpg")%><%= t('.questions') %></a> </li>
-			<li> <a href="http://www.baidu.com"><%= image_tag("cal.png")%><%= t('.news') %></a> </li>
-			<li> <a href="http://www.baidu.com"><%= image_tag("contact.jpg")%><%= t('.contact') %></a> </li>
-			<li> <%= link_to t('.vision'),  visions_path, method: :get   %> </li>
-		</ul>
-		
-		<div>
-			<ul>
-				<% for item in Product::PRODUCT_CATEGORY %>
-					<li><%= link_to( t(".#{item}"), {:controller =>'store',:action => 'index',:catagory => item} ) %></li>
-				<% end %>
-			</ul>	
+		<div id = "logo" class="span2 offset2">
+			<%= image_tag("book.jpg") %>
 		</div>
-				
-		<% if session[:user_id] %>
-		  <% if User.find_by_id(session[:user_id]).identity != "customer" %>
-		  <ul>
-		  	<li><%= link_to t('.orders'),   orders_path   %></li>
-		  	<li><%= link_to t('.products'), products_path %></li>
-		  	<% if User.find_by_id(session[:user_id]).identity == "administrator" %>
-		  		<li><%= link_to t('.users'),    users_path    %></li>
-		  	<% end %>
-		  </ul>
-		  <% end %>
-		  <font color=white size=3>
-		  	<%= t(".#{User.find_by_id(session[:user_id]).identity}") %> :
-		  	<br/>
-		  	<%= User.find_by_id(session[:user_id]).name %>
-		  	<br/>
-		  	<% if session[:user_id] != nil and User.find(session[:user_id]).identity == "customer" %>
-		  		<%= link_to t('.orders'),   orders_path   %><br/>
-			  	<%= link_to 'My Carts', carts_path %>
-			  	</br/>
-		  	<% end %>
-		  </font>
-
-		  <%= button_to t('.edit'), edit_user_path(id: session[:user_id]), method: :get %>
-		  <%= button_to t('.logout'), logout_path, method: :delete %>  
-
-		<% else %>
-			<%= button_to t('.login'), login_path, method: :get %>
-			<%= button_to t('.create'), new_user_path, method: :get %>
-
-		<% end %>
-
+		
+		<div class="span4">
+			<ul class="nav nav-pills">
+				<li class="active"> <a href=/><%= t('.home') %></a> </li>
+				<li> <a href="http://www.baidu.com"><%= t('.questions') %></a> </li>
+				<li> <a href="http://www.baidu.com"><%= t('.news') %></a> </li>
+				<li> <a href="http://www.baidu.com"><%= t('.contact') %></a> </li>
+			</ul>    
+		</div>
+		
+		<div id = "profile" class="span4">
+			<% if session[:user_id] and session[:user_name] %>
+				<h4 class = "span4">Hi, <%= session[:user_name]%>
+					(<%= t(".#{User.find_by_id(session[:user_id]).identity}") %>)</h4>
+				<div class="span2">
+					<%= button_to t('.edit'), edit_user_path(id: session[:user_id]), method: :get, class: 'btn btn-info'%>
+				</div>
+				<div class="span2">
+					<%= button_to t('.logout'), logout_path, method: :delete , class: 'btn btn-info'%> 	
+				</div>			
+			<% else %>
+				<div class="span2 offset4">
+					<%= button_to t('.login'), login_path, method: :get, class: 'btn btn-info' %>
+				</div>
+				<div class = "span2">
+					<%= button_to t('.create'), new_user_path, method: :get, class: 'btn btn-info' %>
+				</div>				
+			<% end %>
+			
+			<div class="span3 offset1">
+				<%= form_tag store_path, class: 'locale span4' do %>
+					<%= select_tag 'set_locale',
+						options_for_select(LANGUAGES, I18n.locale.to_s),
+						onchange: 'this.form.submit()' %>
+					<%= submit_tag 'submit'%>
+					<%= javascript_tag "$('.locale input').hide()" %>
+				<% end %>
+			</div>					
+		</div>
+		
+		<div class="span12"></div>
 	</div>
-	<div id="main">			
-      <%= yield %>
-    </div>
-   </div>     
+	
+	<div id = "columns" class="row-fluid">
+		<div id = "side" class="span3 offset1">
+			
+			<div class="span12"></div>
+			
+			<div class="span12">
+				<%= form_tag store_path, class: 'form-search' do %>
+						<%= text_field_tag 'search', '', class: 'input-small search-query'%>
+	
+						<%= select_tag :about,
+							options_for_select(["Book", "Customer", "Seller"]) %>
+						<br />			
+						<%= submit_tag t('.search'), class: 'btn' %>
+						<br />
+				<% end %>
+			</div>
+			<br />
+			
+			<div class="span12">
+				<% if @cart %>
+		     		<%= hidden_div_if(@cart.line_items.empty?, id:'cart') do%>
+			    		<%= render @cart %>
+				    <% end %>
+				<% end %> 	
+			</div>		
+								
+			<div class="span12">
+		    								
+				<ul class="nav nav-pills nav-stacked">
+					<% for item in Product::PRODUCT_CATEGORY %>
+						<li><%= link_to( t(".#{item}"), {:controller =>'store',:action => 'index',:catagory => item} ) %></li>
+					<% end %>
+				</ul>				
+
+				<ul class="nav nav-pills nav-stacked">
+					
+					<% if session[:user_id] %>
+					  	<% if User.find_by_id(session[:user_id]).identity != "customer" %>
+						  
+						  	<li><%= link_to t('.orders'),   orders_path   %></li>
+						  	<li><%= link_to t('.products'), products_path %></li>
+						  	
+						  	<% if User.find_by_id(session[:user_id]).identity == "administrator" %>
+						  		<li><%= link_to t('.users'),    users_path    %></li>
+						  	<% end %>
+						  	
+						 <% else %>
+						 	<li><%= link_to 'My Carts', carts_path %></li>
+					  		<li><%= link_to t('.orders'),   orders_path   %></li>
+						  	<li><%= link_to t('.vision'),  visions_path, method: :get   %> </li>
+						  	
+					 	<% end %>
+					<% end %> 
+				</ul>
+				
+		  	</div>					
+		</div>
+		
+		<div id = "main" class="span8">
+			<div><%= yield %></div> 
+		</div>
+		
+	</div>	
+</div>
+
 </body>
 </html>

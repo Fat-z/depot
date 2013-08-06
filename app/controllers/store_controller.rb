@@ -6,6 +6,7 @@ class StoreController < ApplicationController
     @about = ""
     @search = ""
     sort = "title"
+    @products2 = Product.all
     
     if params[:order] == "price" or params[:order] == "publish" or params[:order] == "title"
       sort = params[:order]
@@ -142,7 +143,14 @@ class StoreController < ApplicationController
       
       @products = products
     end
-       
+    
+    if ("1".."4") === params[:page] and @products.length != 0
+      index = Integer(params[:page])
+      @products = @products[(index -1)*6..index*6-1 ]
+    else
+      @products = @products[0..5]
+    end 
+             
   end
   
   

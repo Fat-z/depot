@@ -3,58 +3,58 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .store {
-  h1 {
-    margin: 0;
-    padding-bottom: 0.5em;
-    font:  150% sans-serif;
-    color: #226;
 
-    border-bottom: 3px dotted #77d;
-  }
-  a {
-    text-decoration: none;
-    color: blue;
-  }
-  a:hover{ background-color: white; }
-    /* An entry in the store catalog */
-  .entry {
-    overflow: auto;
-    margin-top: 1em;
-    border-bottom: 1px dotted #77d;
-    min-height: 100px;
-
+  #myCarousel{
+    margin-left: 20px;
+    height: 250px;
+    background-color: #880000; 
+    
+    .carousel-content{
+      margin-top: 50px;
+      font-family: Georgia;
+      font-size:30px;
+      color:  #DDDDDD;
+    }
+    
     img {
-      width: 80px;
-      margin-right: 5px;
-      margin-bottom: 5px;
-      position: absolute;
+      width: 240px;
+      height: 240px;
+      margin-top: 5px;
+      margin-right: 20px;  
     }
+    
+  }
 
-    h3 {
-      font-size: 120%;
-      font-family: sans-serif;
-      margin-left: 100px;
-      margin-top: 0;
-      margin-bottom: 2px;
-      color: #227;
+  #order_by{
+    width: 70px;
+  }
+  
+  #entry{
+    
+    overflow: auto;
+    border-top: 3px dotted #666666;
+    min-height: 100px;
+    color: #0066FF;
+        
+    ul li{
+      margin-top: 20px;
+      width: 30%;
+      height: 450px;
     }
+    
+    #entry_item{
+      color: #44a;
+            
+      p, .button_to{
+        margin-left: 12px;
+      }
 
-    p, div.price_line {
-      margin-left: 100px;
-      margin-top: 0.5em; 
-      margin-bottom: 0.8em;
-      form, div {
-	display: inline;
+      a:hover{
+        color: #AA0000;
+        background-color: white;
       }
     }
-
-    .price {
-      color: #44a;
-      font-weight: bold;
-      margin-right: 3em;
-    }
+    
   }
-  .button_publish {
-    margin-left: 870px;
-  }
+  
 }

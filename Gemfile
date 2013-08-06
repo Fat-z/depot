@@ -1,5 +1,7 @@
 source 'http://ruby.taobao.org'
 
+gem 'bootstrap-sass'
+
 gem 'rails', '3.2.13'
 
 gem 'paperclip','~> 3.5.0'
