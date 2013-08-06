@@ -43,14 +43,21 @@
     }
     
     #entry_item{
-      color: #44a;
+      color: #0000FF;
             
       p, .button_to{
         margin-left: 12px;
+        font-size: bold;
       }
-
+ 
+      a {
+        color: #FF8800;
+        font-size: 120%;
+        margin-left: 12px;
+      }
+      
       a:hover{
-        color: #AA0000;
+        color: #444444;
         background-color: white;
       }
     }
