@@ -1,6 +1,10 @@
 <h1>Listing carts</h1>
+
 <% if notice %>
-	<p class="notice"><%= notice %></p>
+	<div id = "notice" class="alert alert-error">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<p><strong>Warning! </strong> <%= notice %></p>
+	</div>
 <% end %>
 
 <% if @carts.length == 0 %>
@@ -8,7 +12,7 @@
 	
 <% else %>
 
-	<table>
+	<table class="table">
 	  <tr>
 	  	<th>Owner</th>
 	  	<th></th>

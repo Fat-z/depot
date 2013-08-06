@@ -1,9 +1,12 @@
 <% if notice %>
-	<p id="notice"><%= notice %></p>
+	<div id = "notice" class="alert alert-error">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<p><strong>Warning! </strong> <%= notice %></p>
+	</div>
 <% end %>
 
 <div class="cart_title">Your Cart</div>
-<table>
+<table class="table">
   <%= render(@cart.line_items) %>
 
   <tr class="total_line">

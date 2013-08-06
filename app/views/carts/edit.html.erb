@@ -1,14 +1,17 @@
 <h1>Editing cart</h1>
 
 <% if notice %>
-	<p id = "notice"><%= notice %></p>
+	<div id = "notice" class="alert alert-error">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<p><strong>Warning! </strong> <%= notice %></p>
+	</div>
 <% end %>
 
 <% if @cart.line_items.length == 0 %>
 	<h3>Your cart is empty</h3>
 	
 <% else %>
-	<table>
+	<table class="table">
 		<tr>
 		    <th>Quantity</th>
 		    <th>Name</th>
@@ -25,7 +28,7 @@
 					  <td><%= line_item.product.title %></td>
 					  <td class="item_price"><%= number_to_currency(line_item.total_price) %></td>
 					  <td><%= line_item.product.category %></td>
-					  <td><%= f.submit 'Update'%></td>
+					  <td><%= f.submit 'Update', class: 'btn btn-info' %></td>
 					  <td><%= link_to 'Remove', line_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 				<% end %>
 				

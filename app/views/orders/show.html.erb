@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+	<div id = "notice" class="alert alert-error">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<p><strong>Warning! </strong> <%= notice %></p>
+	</div>
+<% end %>
 
 <p>
   <b>Name:</b>
@@ -22,7 +27,7 @@
 
 <p>
 	<br><b>Line Items:</b></br>
-	<table>
+	<table class="table">
 		<tr>
 			<th>quantity</th>
 			<th>title</th>

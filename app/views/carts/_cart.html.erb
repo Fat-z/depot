@@ -1,6 +1,6 @@
 <div class = "cart_title"><%= t('.title') %></div>
 
-<table class="table" >
+<table class="table">
   <%= render(cart.line_items) %>
 
   <tr class="total_line">
@@ -11,7 +11,6 @@
 </table>
     
 <% if cart.user_id == session[:user_id] %>
-	<!--<div class="btn-group" data-toggle="buttons-checkbox">-->
 	<%= button_to t('.checkout'), new_order_path, method: :get, class: 'btn btn-primary'%>
 	
 	<% if cart.line_items.length != 0 %>

@@ -1,7 +1,10 @@
 
 <div class="depot_form">
 	<% if flash[:alert] %>
-	  <p id="notice"><%= flash[:alert] %></p>
+		<div id = "notice" class="alert alert-error">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<p><strong>Warning! </strong> <%= flash[:alert] %></p>
+		</div>
 	<% end %>
 	
 	<%= form_tag do %>
@@ -19,7 +22,7 @@
 	  	</div>
 	  	
 	  	<div>
-	  		<%= submit_tag "Login" %>
+	  		<%= submit_tag "Login", class: 'btn btn-inverse' %>
 	  	</div>
 	  </fieldset>
     <% end %>
