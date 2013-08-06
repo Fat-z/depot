@@ -24,7 +24,7 @@ class Product < ActiveRecord::Base
 # 
   validates :title, uniqueness: true
   
- # validates_attachment_presence :photo
+  #validates_attachment_presence :photo 
   validates_attachment_size :photo, :less_than => 5.megabytes
   validates_attachment_content_type :photo, :content_type =>['image/jpeg','image/png','image/gif']
 
@@ -33,7 +33,9 @@ class Product < ActiveRecord::Base
     message: 'must be a URL for GIF, JPG or PNG image.'
   }
   validates :title, length: {minimum: 10}
-
+  
+  before_create :randomize_file_name
+  before_update :randomize_file_name
   def decrease(number)
       repertory - number
   end
@@ -47,6 +49,13 @@ class Product < ActiveRecord::Base
       else
         errors.add(:base, 'Line Items present')
         return false
+      end
+    end
+    
+    def randomize_file_name
+      if photo_file_name!=nil
+      extension = File.extname(photo_file_name).downcase
+      self.photo.instance_write(:file_name, "#{Time.now.strftime("%Y%m%d%H%M%S")}#{rand(1000)}#{extension}")
       end
     end
 
