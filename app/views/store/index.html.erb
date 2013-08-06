@@ -9,20 +9,28 @@
 
 <%= form_tag( :action => "index", :catagory => @catag, :search => @search, :about => @about) do |f| %>
 	<%= label_tag("Order by") %>
+	<!--
+	<%= select_tag :order, 
+		options_for_select(["title", "publish", "price", "popular"]),
+		onchange: 'this.form.submit()' %>
+	<%= submit_tag 'submit', class: "order" %>
+	<%= javascript_tag "$('.order').hide()" %>
+	-->
 	
-	<%= radio_button_tag(:order, "title", true)%>
-	<%= label_tag(:order_title, "Title")%>
+	<%= radio_button_tag(:order, "title", true, click: "this.form.submit()")%>
+	<%= label_tag(:order_title, "Title") %>
 	
-	<%= radio_button_tag(:order, "publish")%>
+	<%= radio_button_tag(:order, "publish", click: "this.form.submit()")%>
 	<%= label_tag(:order_publish, "Publisher")%>
 	
-	<%= radio_button_tag(:order, "price")%>
+	<%= radio_button_tag(:order, "price", click: "this.form.submit()" )%>
 	<%= label_tag(:order_price, "Price")%>
 
-	<%= radio_button_tag(:order, "popular")%>
+	<%= radio_button_tag(:order, "popular", click: "this.form.submit()")%>
 	<%= label_tag(:order_popular, "Popular")%>
-		
-	<%= submit_tag 'submit'%>
+	
+	<%= submit_tag 'submit', class: "order" %>
+	<%= javascript_tag "$('.order').hide()" %>
 	
 <% end %>
 
