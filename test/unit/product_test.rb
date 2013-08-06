@@ -8,7 +8,7 @@ class ProductTest < ActiveSupport::TestCase
     assert product.errors[:description].any?
     assert product.errors[:price].any?
     assert product.errors[:category].any?
-    assert product.errors[:image_url].any?
+    assert product.image_url=="init.jpg"
   end
 
   test "product price must be positive" do

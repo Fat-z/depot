@@ -24,16 +24,19 @@
     <%= f.text_field :repertory%>
   </div>
 
+  
   <div class="field">
   	<%= f.label :photo %><br />
     <%= f.file_field :photo %>
   </div>
-
-  <div class="field" style="display: none">
-    <%= f.label :image_url %><br />
-    <%= f.text_field :image_url, :value => "init.jpg"%>
-  </div>
   
+  <% if session[:user_id] and (User.find_by_id(session[:user_id]).identity == 'administrator') %>
+
+  <div class="field">
+    <%= f.label :image_url %><br />
+    <%= f.text_field :image_url%>
+  </div>
+  <% end %>
   <div>
     <%= f.label :category%><br />
     <%= f.select :category, Product::PRODUCT_CATEGORY,

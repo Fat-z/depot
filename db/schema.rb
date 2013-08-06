@@ -56,10 +56,10 @@ ActiveRecord::Schema.define(:version => 20130805014618) do
   create_table "products", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "image_url"
+    t.string   "image_url",          :default => "init.jpg"
     t.decimal  "price"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.string   "publish"
     t.integer  "repertory",          :default => 1
     t.string   "category"
