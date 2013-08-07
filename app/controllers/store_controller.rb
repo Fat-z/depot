@@ -65,6 +65,7 @@ class StoreController < ApplicationController
            products.each do |pro|
              item = {"product_id" => pro.id,
                   "image_url" => pro.image_url, 
+                  "photo" => pro.photo,
                   "description" => pro.description,
                   "title" => pro.title,
                   "price" => pro.price,
