@@ -120,7 +120,7 @@ class VisionsController < ApplicationController
     @product.save
 
     VisionNotifier.published(@vision).deliver
-    #@vision.destroy
+    @vision.destroy
     redirect_to edit_product_path(@product)
   end
 
