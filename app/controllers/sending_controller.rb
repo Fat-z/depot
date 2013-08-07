@@ -17,7 +17,14 @@ class SendingController < ApplicationController
     @quantity = @line_item.quantity
     @product.repertory = @product.decrease(@quantity)
     @product.save
+    @order = @line_item.order 
     @line_item.destroy
+    @line = @order.line_items
+
+    if @line.count == 0
+      @order.destroy
+    end
+    
     redirect_to orders_url, notice: "Email has been sent"
   end
 
