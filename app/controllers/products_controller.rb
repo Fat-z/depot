@@ -74,16 +74,33 @@ class ProductsController < ApplicationController
   # PUT /products/1.json
   def update
     @product = Product.find(params[:id])
-    @product.photo.destroy
-    respond_to do |format|
-      if @product.update_attributes(params[:product])
-       
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
+    if @product.photo.exists?
+      @temp = Product.new
+      @temp.photo = @product.photo
+      respond_to do |format|
+        if @product.update_attributes(params[:product])
+          if !@product.photo.exists?
+            @temp.id = @product.id
+            @product.photo = @temp.photo
+            @product.save
+          end      
+          format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
+      end 
+    else   
+      respond_to do |format|
+        if @product.update_attributes(params[:product])     
+          format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
+      end  
     end
   end
 
