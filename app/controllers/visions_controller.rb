@@ -60,7 +60,7 @@ class VisionsController < ApplicationController
       @vision = Vision.new(params[:vision])
 
       @vision.publisher = session[:user_id]
-      
+
       respond_to do |format|
         if @vision.save
           format.html { redirect_to @vision, notice: 'Vision was successfully created.' }
@@ -109,9 +109,19 @@ class VisionsController < ApplicationController
 
   def dispose
     @vision = Vision.find(params[:id])
+    @product = Product.new
+    @product.title = @vision.title
+    @product.publish = User.find(session[:user_id]).name
+    @product.description = "Empty" 
+    @product.repertory = 0
+    @product.temprepertory = 0
+    @product.price = 1
+    @product.category = "literature"
+    @product.save
+
     VisionNotifier.published(@vision).deliver
-    @vision.destroy
-    redirect_to new_product_path
+    #@vision.destroy
+    redirect_to edit_product_path(@product)
   end
 
 
