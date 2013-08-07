@@ -102,6 +102,8 @@ class OrdersController < ApplicationController
     
     respond_to do |format|
       if @order.save
+        @order.user_id = session[:user_id]
+        @order.save
         Cart.destroy(@cart.id)
         OrderNotifier.received(@order).deliver
         format.html { redirect_to carts_path, notice:
