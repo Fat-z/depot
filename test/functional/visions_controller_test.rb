@@ -5,8 +5,6 @@ class VisionsControllerTest < ActionController::TestCase
     @vision = visions(:one)
     @update = {
       title:       'Ruby',
-      publisher:   '1',
-      taker:        1,
       number:       2,
       email:        "631979719@qq.com",
       comment:      "hi"
