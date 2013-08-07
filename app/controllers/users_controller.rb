@@ -112,9 +112,40 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   # DELETE /users/1.json
-  def destroy
+def destroy
+
     if session != nil and User.find(session[:user_id]).identity == "administrator"
       @user = User.find(params[:id])
+
+      if @user.identity == "customer"
+        @visions = Vision.where(publisher: @user.id)
+        @orders = Order.where(user_id: @user.id)
+
+        @visions.each do |vision|
+          vision.destroy   
+        end
+        @orders.each do |order|
+          order.destroy   
+        end
+
+      elsif @user.identity == "seller"
+        @products = Product.where(publish: @user.name)
+        @lineitems = LineItem.all
+
+        @products.each do |product|
+          @lineitems.each do |lineitem|
+            if lineitem.product.title == product.title
+              lineitem.destroy
+            end
+          end  
+          product.destroy 
+        end
+          
+      end
+
+
+
+
       begin
         @user.destroy
         flash[:notice] = "User #{@user.name} deleted"
