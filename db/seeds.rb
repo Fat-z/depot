@@ -69,7 +69,9 @@ Product.create(title: 'CoffeeScript',
   image_url:   'cs.jpg',    
   category: 'life',
   price: 36.00,
-  publish: 'zhan')
+  publish: 'zhan',
+  repertory: 5,
+  temprepertory: 5)
   #publish: 'zhan63906')
 # . . .
 
@@ -83,7 +85,9 @@ Product.create(title: 'Programming Ruby 1.9',
   image_url: 'ruby.jpg',
   category: 'science',
   price: 49.95,
-  publish: 'zhan')
+  publish: 'zhan',
+  repertory: 4,
+  temprepertory: 4)
 # . . .
 
 Product.create(title: 'Rails Test Prescriptions',
@@ -99,7 +103,9 @@ Product.create(title: 'Rails Test Prescriptions',
   image_url: 'rtp.jpg',
   category: 'science',
   price: 34.95,
-  publish: 'ni')
+  publish: 'ni',
+  repertory: 6,
+  temprepertory: 6)
   
 Product.create(title: 'Sherlock Holmes',
   description: 
@@ -116,7 +122,9 @@ Product.create(title: 'Sherlock Holmes',
   image_url: 'sherlock.jpg',
   category: 'literature',
   price: 21.95,
-  publish: 'ni') 
+  publish: 'ni',
+  repertory: 5,
+  temprepertory: 5) 
   
 Product.create(title: 'AP U.S. History',
   description: 
@@ -132,7 +140,9 @@ Product.create(title: 'AP U.S. History',
   image_url: 'us.jpg',
   category: 'culture',
   price: 98.10,
-  publish: 'ni')
+  publish: 'ni',
+  repertory: 3,
+  temprepertory: 3)
   
 Product.create(title: 'Business Model Generation',
   description: 
@@ -166,7 +176,9 @@ Product.create(title: 'PHR and SPHR',
   image_url: 'php.jpg',
   category: 'science',
   price: 55.45,
-  publish: 'lc')
+  publish: 'lc',
+  repertory: 2,
+  temprepertory: 2)
 
 Product.create(title: 'Fifty Great Short Stories',
   description: 
@@ -192,4 +204,6 @@ Product.create(title: 'Eat and Run',
   image_url: 'eat.jpg',
   category: 'life',
   price: 34.95,
-  publish: 'guo')
+  publish: 'guo',
+  repertory: 7,
+  temprepertory: 7)
