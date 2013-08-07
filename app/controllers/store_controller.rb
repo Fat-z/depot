@@ -5,12 +5,12 @@ class StoreController < ApplicationController
     @catag = ""
     @about = ""
     @search = ""
-    sort = "title"
+    @sort = "title"
     @page = 1
     @products2 = Product.all
     
     if params[:order] == "price" or params[:order] == "publish" or params[:order] == "title"
-      sort = params[:order]
+      @sort = params[:order]
     end
     
     if params[:set_locale]
@@ -19,10 +19,10 @@ class StoreController < ApplicationController
     
     if params[:catagory] and params[:catagory].lstrip != ""
       @catag = params[:catagory]
-      @products = Product.where("category = ?", params[:catagory]).order(sort)
+      @products = Product.where("category = ?", params[:catagory]).order(@sort)
       
     else
-      @products = Product.order(sort)
+      @products = Product.order(@sort)
     end
   
     @cart = current_cart
@@ -35,7 +35,7 @@ class StoreController < ApplicationController
       when "Book"
         @about = "Book"
         product = []
-        products = Product.order(sort)
+        products = Product.order(@sort)
         products.each  do |pro|
           if pro.title.upcase.include?(params[:search].upcase)
             product.push(pro)
@@ -153,9 +153,6 @@ class StoreController < ApplicationController
       end
     end
     @products = @products[(@page -1)*6..@page*6-1 ]
-    #else
-      #@products = @products[0..5]
-    #end 
              
   end
   

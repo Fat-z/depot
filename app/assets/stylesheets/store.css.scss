@@ -57,7 +57,10 @@
       }
       
       #description{
+        width: 240px;
         color: #444444;
+        white-space: normal;
+        word-wrap: break-word;
       } 
       
       a {
