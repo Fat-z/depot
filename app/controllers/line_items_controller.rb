@@ -155,7 +155,7 @@ class LineItemsController < ApplicationController
           if @line_item.cart_id != nil
             format.html { redirect_to edit_cart_path(@cart), notice: 'Remove line_item successfully.' }
           else
-            format.html { redirect_to show_order_path(@order), notice: 'Remove line_item successfully'}
+            format.html { redirect_to orders_path, notice: 'Remove line_item successfully'}
           end
         end
       else
