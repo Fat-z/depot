@@ -16,7 +16,8 @@
     <td><%= vision.title %></td>
     <td><%= vision.number %></td>
     <td><%= vision.email %></td>
-    <td><%= vision.comment %></td>
+    <td><dd><%= truncate(strip_tags(vision.comment),
+                length: 40) %></dd></td>
     <td><%= link_to 'Show', vision %></td>
 
     <% if session[:user_id] != nil and User.find(session[:user_id]).identity == "seller" %>
