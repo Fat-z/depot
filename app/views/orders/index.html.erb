@@ -17,7 +17,7 @@
         <!-- order     Order.find_by_id(line_item.order_id)-->
 
         <% @line_items.each do |line_item| %>
-          <% if Product.find_by_id(line_item.product_id).publish == User.find_by_id(session[:user_id]).name %>
+          <% if line_item.order_id != nil and Product.find_by_id(line_item.product_id).publish == User.find_by_id(session[:user_id]).name %>
 	            <tr>
 	              <td><%= Order.find_by_id(line_item.order_id).name %></td>
 	              <td><%= Order.find_by_id(line_item.order_id).address %></td>
