@@ -89,15 +89,15 @@
 							    
 							      <% if product.temprepertory > 0 %>  
 							  		  <%= button_to t('.add_html'), line_items_path(:product_id => product, :cart_id => @cart.id),
-							  			   remote: true , class: 'btn btn-danger btn-small'%>
+							  			   remote: true , class: 'btn btn-danger btn-small '%>
 							      <% else %>
 							        <p><font color="red">Sorry for the product's stockout!</font></p>
 							      <% end %>
 							      
 							    <% elsif User.find_by_id(session[:user_id]).identity == "administrator" or 
 							    	session[:user_name] == product.publish %>
-							    	<%= button_to t('.edit'), edit_product_path(id: product), method: :get , class: 'btn btn-danger btn-small'%>
-							        <%= button_to t('.delete'), product_path(id: product), method: :delete , class: 'btn btn-danger btn-small'%>
+							    	<%= button_to t('.edit'), edit_product_path(id: product), method: :get , class: 'btn btn-danger btn-small '%>
+							        <%= button_to t('.delete'), product_path(id: product), method: :delete , class: 'btn btn-danger btn-small '%>
 							    	
 							    <% end %>
 							    
