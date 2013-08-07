@@ -3,6 +3,14 @@ require 'test_helper'
 class VisionsControllerTest < ActionController::TestCase
   setup do
     @vision = visions(:one)
+    @update = {
+      title:       'Ruby',
+      publisher:   '1',
+      taker:        1,
+      number:       2,
+      email:        "631979719@qq.com",
+      comment:      "hi"
+    }    
   end
 
   test "should get index" do
@@ -18,7 +26,8 @@ class VisionsControllerTest < ActionController::TestCase
 
   test "should create vision" do
     assert_difference('Vision.count') do
-      post :create, vision: { publisher: @vision.publisher, taker: @vision.taker, title: @vision.title }
+      post :create, vision: @update
+      #post :create, vision: { publisher: @vision.publisher, taker: @vision.taker, title: @vision.title, number: @vision.number }
     end
 
     assert_redirected_to vision_path(assigns(:vision))
@@ -35,7 +44,8 @@ class VisionsControllerTest < ActionController::TestCase
   end
 
   test "should update vision" do
-    put :update, id: @vision, vision: { publisher: @vision.publisher, taker: @vision.taker, title: @vision.title }
+    put :update, id: @vision, vision:  @update
+    #put :update, id: @vision, vision: { publisher: @vision.publisher, taker: @vision.taker, title: @vision.title, number: @vision.number }
     assert_redirected_to vision_path(assigns(:vision))
   end
 

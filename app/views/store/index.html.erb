@@ -56,7 +56,7 @@
 			<div id = "order_by" class = "span2"><%= label_tag("Order by") %></div>
 			
 			<%= select_tag :order, 
-				options_for_select(["title", "publish", "price", "popular"]),
+				options_for_select([" ", "title", "publish", "price", "popular"]),
 				onchange: 'this.form.submit()' %>
 			<%= submit_tag 'submit', class: "order" %>
 			<%= javascript_tag "$('.order').hide()" %>
@@ -102,7 +102,7 @@
 							    <% end %>
 							    
 						    <% end %>	
-						    <p><%= truncate(strip_tags(product["description"]), length: 70) %></p>
+						    <p id = "description"><%= truncate(strip_tags(product["description"]), length: 70) %></p>
 					    </div>		    	
 				    </div>
 				</li>>

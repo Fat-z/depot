@@ -35,13 +35,19 @@
     border-top: 3px dotted #666666;
     min-height: 100px;
     color: #0066FF;
-        
+    
     ul li{
       margin-top: 20px;
       width: 30%;
-      height: 450px;
+      height: 400px;
     }
-    
+
+    img {
+      width: 220px;
+      height: 280px;
+      margin-bottom: 10px;  
+    } 
+        
     #entry_item{
       color: #0000FF;
             
@@ -49,7 +55,11 @@
         margin-left: 12px;
         font-size: bold;
       }
- 
+      
+      #description{
+        color: #444444;
+      } 
+      
       a {
         color: #FF8800;
         font-size: 120%;

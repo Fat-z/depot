@@ -60,7 +60,7 @@ class VisionsController < ApplicationController
       @vision = Vision.new(params[:vision])
 
       @vision.publisher = session[:user_id]
-
+      
       respond_to do |format|
         if @vision.save
           format.html { redirect_to @vision, notice: 'Vision was successfully created.' }
