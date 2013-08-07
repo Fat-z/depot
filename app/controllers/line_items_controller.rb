@@ -140,15 +140,20 @@ class LineItemsController < ApplicationController
           @order = LineItem.find(params[:id]).order
         end
         
-        @order = @line_item.order 
-        
+        @line = nil
+
+        if @line_item.order != nil
+          @order = @line_item.order 
+          @line = @order.line_items
+        end
+
         @line_item.clear_the_item    
         @line_item.destroy
 
-        @line = @order.line_items
-
-        if @line.count == 0
-          @order.destroy
+        if @line != nil
+          if @line.count == 0
+            @order.destroy
+          end
         end
         
         respond_to do |format|
