@@ -4,11 +4,11 @@ class VisionsControllerTest < ActionController::TestCase
   setup do
     @vision = visions(:one)
     @update = {
-      title:       'Ruby',
-      number:       2,
-      email:        "631979719@qq.com",
-      comment:      "hi"
-    }    
+      title:       'Lorem Ipsum',
+      comment: 'Wibbles are fun!',
+      number:   2,
+      email:     'dasdsadasd@qq.com'
+    }  
 
   end
 
