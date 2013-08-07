@@ -89,6 +89,7 @@
 						  
 						  	<li><%= link_to t('.orders'),   orders_path   %></li>
 						  	<li><%= link_to t('.products'), products_path %></li>
+						  	<li><%= link_to t('.vision'),  visions_path, method: :get   %> </li>
 						  	
 						  	<% if User.find_by_id(session[:user_id]).identity == "administrator" %>
 						  		<li><%= link_to t('.users'),    users_path    %></li>
